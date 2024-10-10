@@ -67,8 +67,6 @@ body {
   }
   
   .pokemon-card {
-    width: 240px;
-    height: 336px;
     background-image: url('https://github.com/nebuk89/FFmpeg-Builds/blob/master/image%2010.png?raw=true');
     background-size: cover;
     background-position: center;
@@ -85,14 +83,13 @@ body {
   }
   
 .pokemon-card h2 {
-    margin: 0;
-    font-size: 24px;
-    background-color: rgba(255, 255, 255, 0.7);
-    padding: 5px 10px;
-    border-radius: 5px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+  margin: 0;
+  font-size: clamp(16px, 4vw, 24px);
+  background-color: rgba(255, 255, 255, 0.7);
+  padding: 5px 10px;
+  border-radius: 5px;
+  white-space: nowrap;
+  overflow: hidden;
 }
   
 .attributes {
@@ -167,8 +164,10 @@ body {
     font-weight: bold;
     flex: 0 0 100px;
     padding-right: 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: clip;
   }
-  
   .attack-values {
     display: flex;
     justify-content: flex-start;
