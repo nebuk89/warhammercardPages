@@ -7,6 +7,7 @@ function App() {
       M: 0, T: 0, SV: 0, W: 0, LD: 0, OC: 0,
     });
     const [attacks, setAttacks] = React.useState([]);
+    const [overlayText, setOverlayText] = React.useState(""); // P5eaa
   
     const handleImageUpload = (e) => {
       const file = e.target.files[0];
@@ -133,6 +134,12 @@ function App() {
               </div>
             ))}
             <button onClick={addAttack}>Add Attack</button>
+            <input // P76ad
+              type="text"
+              placeholder="Overlay Text"
+              value={overlayText}
+              onChange={(e) => setOverlayText(e.target.value)} // P5b03
+            />
           </div>
           <div className="card-preview">
             <div className="pokemon-card-wrapper">
@@ -149,7 +156,7 @@ function App() {
                   </div>
                 </div>
                 {image && <img src={image} alt="Unit" className="pokemon-image" />}
-                <div className="overlay-text">Adeptus Astartes, Blood Angels</div>
+                <div className="overlay-text">{overlayText || "Adeptus Astartes, Blood Angels"}</div> {/* P10af */}
                 <div className="attacks">
                   <div className="attack-labels">
                     <span></span>
