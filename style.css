@@ -275,8 +275,8 @@ body {
   height: 93px;
   margin: 10px auto;
   color: black;
-  text-align: center;
-  font-size: small;
+  text-align: left;
+  font-size: large;
   line-height: 1.5;
   font-family: 'Trattatello', fantasy;
   white-space: pre-line;

@@ -36,6 +36,10 @@ function App() {
         return newAttacks;
       });
     };
+
+    React.useEffect(() => {
+      setFactionText("■FACTION : Oath of Moment\nStart of the Fight phase, select  1   to apply to models in this unit until the end of the phase:\n■ Swords of the Imperium: Each time a model in this unit makes a melee attack, re-roll a Hit roll of 1.\n■ Shields of the Imperium: Each time an invulnerable saving throw is made for a model in this unit, re-roll a saving throw of 1");
+    }, [overlayText]);
    
     React.useEffect(() => {
       const pokemonCardTitle = document.querySelector('.pokemon-card h2');
@@ -45,6 +49,8 @@ function App() {
       const maxWidthAttack = 110;
 
       function resizeTextToFit() {
+      
+      // Resize the title text to fit within the maxWidth
       let fontSize = parseInt(window.getComputedStyle(pokemonCardTitle).fontSize);
       if (pokemonCardTitle.scrollWidth > maxWidth) {
         while (pokemonCardTitle.scrollWidth > maxWidth && fontSize > 0) {
@@ -58,8 +64,8 @@ function App() {
         }
       }
       pokemonCardTitle.style.whiteSpace = 'nowrap'; // Add this line to prevent text wrapping
-      
-
+  
+// Resize the attacks text to fit within the maxWidth
       attackInfoElements.forEach((attackInfo) => {
         const attackName = attackInfo.querySelector('.attack-name');
         let attackFontSize = parseInt(window.getComputedStyle(attackName).fontSize);
@@ -75,21 +81,22 @@ function App() {
         }
         }
         attackName.style.whiteSpace = 'nowrap'; // Add this line to prevent text wrapping
+
+        
+        // Resize the faction-text to always fit within 6 lines of text 
+        const faction_text_max_height = 6 * parseFloat(window.getComputedStyle(factionTextElement).lineHeight);
+        if (factionTextElement.scrollHeight > faction_text_max_height) {
+        while (factionTextElement.scrollHeight > faction_text_max_height) {
+          fontSize--;
+          factionTextElement.style.fontSize = fontSize + 'px';
+        } 
+        }
+    
+
+
       });
 
-      let factionFontSize = parseInt(window.getComputedStyle(factionTextElement).fontSize);
-      if (factionTextElement.scrollWidth > maxWidth) {
-        while (factionTextElement.scrollWidth > maxWidth && factionFontSize > 0) {
-          factionFontSize--;
-          factionTextElement.style.fontSize = factionFontSize + 'px';
-        }
-      } else {
-        while (factionTextElement.scrollWidth < factionTextElement.clientWidth && factionFontSize < maxWidth) {
-          factionFontSize++;
-          factionTextElement.style.fontSize = factionFontSize + 'px';
-        }
-      }
-      factionTextElement.style.whiteSpace = 'nowrap'; // Add this line to prevent text wrapping
+     
       }
 
       resizeTextToFit();
@@ -105,7 +112,7 @@ function App() {
   
     return (
       <div className="container">
-        <h1>Custom Warhammer Card Creator 0</h1>
+        <h1>Custom Warhammer Card Creator 1</h1>
         <div className="card-creator">
           <div className="input-section">
             <input
