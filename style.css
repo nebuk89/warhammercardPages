@@ -190,87 +190,98 @@ body {
   border-image-slice: 1;
 }
 
+.attacks {
+  background-color: rgba(255, 255, 255, 0.7);
+  border-radius: 8px;
+  padding: 10px;
+}
 
-  
-  .attacks {
-    background-color: rgba(255, 255, 255, 0.7);
-    border-radius: 8px;
-    padding: 10px;
-  }
-  
-  .attack-labels {
-    display: flex;
-    justify-content: flex-start;
-    font-weight: bold;
-    margin-bottom: 5px;
-    padding-left: 100px;
-  }
-  
-  .attack-labels span {
-    flex: 1;
-    text-align: center;
-  }
-  
-  .attack-labels .stat-label {
-    flex: 0 0 40px;
-  }
-  
-  .attack-info {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    margin-bottom: 10px;
-    padding: 5px;
-    background-color: rgba(240, 240, 240, 0.8);
-    border-radius: 4px;
-  }
-  
-  .attack-name {
-    font-weight: bold;
-    padding-right: 10px;
-    white-space: nowrap;
-    /*overflow: hidden;
-    flex: 0 0 100px;
-    text-overflow: clip;*/
-  }
-  .attack-values {
-    display: flex;
-    justify-content: flex-start;
-    flex: 1;
-  }
-  
-  .attack-values .stat-value {
-    flex: 1;
-    text-align: center;
-  }
-  
-  .attack-input {
-    margin-bottom: 15px;
-  }
-  
-  .attack-stats {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 5px;
-  }
-  
-  .attack-stat {
-    display: flex;
+.attack-labels {
+  display: flex;
+  justify-content: flex-start;
+  font-weight: bold;
+  margin-bottom: 5px;
+  padding-left: 100px;
+}
+
+.attack-labels span {
+  flex: 1;
+  text-align: center;
+}
+
+.attack-labels .stat-label {
+  flex: 0 0 40px;
+}
+
+.attack-info {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 10px;
+  padding: 5px;
+  background-color: rgba(240, 240, 240, 0.8);
+  border-radius: 4px;
+}
+
+.attack-name {
+  font-weight: bold;
+  padding-right: 10px;
+  white-space: nowrap;
+  /*overflow: hidden;
+  flex: 0 0 100px;
+  text-overflow: clip;*/
+}
+.attack-values {
+  display: flex;
+  justify-content: flex-start;
+  flex: 1;
+}
+
+.attack-values .stat-value {
+  flex: 1;
+  text-align: center;
+}
+
+.attack-input {
+  margin-bottom: 15px;
+}
+
+.attack-stats {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 5px;
+}
+
+.attack-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.attack-stat label {
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.attack-stat input {
+  width: 40px;
+}
+
+.faction-text {
+  border: 2px solid yellow;
+  width: 80%;
+  height: calc(80% / 3);
+  margin: 10px auto;
+  color: black;
+  text-align: center;
+  font-size: small;
+  line-height: 1.5;
+  font-family: 'Trattatello', fantasy;
+  white-space: pre-line;
+}
+
+@media (max-width: 768px) {
+  .card-creator {
     flex-direction: column;
-    align-items: center;
   }
-  
-  .attack-stat label {
-    font-size: 12px;
-    font-weight: bold;
-  }
-  
-  .attack-stat input {
-    width: 40px;
-  }
-  
-  @media (max-width: 768px) {
-    .card-creator {
-      flex-direction: column;
-    }
-  }
+}

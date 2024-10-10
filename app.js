@@ -8,7 +8,8 @@ function App() {
     });
     const [attacks, setAttacks] = React.useState([]);
     const [overlayText, setOverlayText] = React.useState(""); 
-  
+    const [factionText, setFactionText] = React.useState("■FACTION : Oath of Moment\nStart of the Fight phase, select  1   to apply to models in this unit until the end of the phase:\n■ Swords of the Imperium: Each time a model in this unit makes a melee attack, re-roll a Hit roll of 1.\n■ Shields of the Imperium: Each time an invulnerable saving throw is made for a model in this unit, re-roll a saving throw of 1");
+
     const handleImageUpload = (e) => {
       const file = e.target.files[0];
       const reader = new FileReader();
@@ -39,6 +40,7 @@ function App() {
     React.useEffect(() => {
       const pokemonCardTitle = document.querySelector('.pokemon-card h2');
       const attackInfoElements = document.querySelectorAll('.attack-info');
+      const factionTextElement = document.querySelector('.faction-text');
       const maxWidth = 240;
       const maxWidthAttack = 110;
 
@@ -74,6 +76,20 @@ function App() {
         }
         attackName.style.whiteSpace = 'nowrap'; // Add this line to prevent text wrapping
       });
+
+      let factionFontSize = parseInt(window.getComputedStyle(factionTextElement).fontSize);
+      if (factionTextElement.scrollWidth > maxWidth) {
+        while (factionTextElement.scrollWidth > maxWidth && factionFontSize > 0) {
+          factionFontSize--;
+          factionTextElement.style.fontSize = factionFontSize + 'px';
+        }
+      } else {
+        while (factionTextElement.scrollWidth < factionTextElement.clientWidth && factionFontSize < maxWidth) {
+          factionFontSize++;
+          factionTextElement.style.fontSize = factionFontSize + 'px';
+        }
+      }
+      factionTextElement.style.whiteSpace = 'nowrap'; // Add this line to prevent text wrapping
       }
 
       resizeTextToFit();
@@ -84,7 +100,7 @@ function App() {
       window.removeEventListener('resize', resizeTextToFit);
       window.removeEventListener('input', resizeTextToFit);
       };
-    }, [name]); // Add 'name' as a dependency to the useEffect hook
+    }, [name, factionText]); // Add 'name' and 'factionText' as dependencies to the useEffect hook
 
   
     return (
@@ -140,7 +156,13 @@ function App() {
               </div>
             ))}
             <button onClick={addAttack}>Add Attack</button>
-           
+            <h3>Faction Text</h3>
+            <textarea
+              value={factionText}
+              onChange={(e) => setFactionText(e.target.value)}
+              rows="6"
+              cols="50"
+            />
           </div>
           <div className="card-preview">
             <div className="pokemon-card-wrapper">
@@ -182,6 +204,7 @@ function App() {
                     </div>
                   ))}
                 </div>
+                <div className="faction-text">{factionText}</div>
               </div>
             </div>
           </div>
