@@ -82,26 +82,29 @@ function App() {
         }
         attackName.style.whiteSpace = 'nowrap'; // Add this line to prevent text wrapping
 
-        
-        // Resize the faction-text to always fit within 6 lines of text 
-        const faction_text_max_height = 6 * parseFloat(window.getComputedStyle(factionTextElement).lineHeight);
-        let initialFontSize = parseInt(window.getComputedStyle(factionTextElement).fontSize); // P654a
-        if (factionTextElement.scrollHeight > faction_text_max_height) {
-          while (factionTextElement.scrollHeight > faction_text_max_height) {
-            initialFontSize--;
-            factionTextElement.style.fontSize = initialFontSize + 'px';
-          } 
-        } else { // P677f
-          while (factionTextElement.scrollHeight <= faction_text_max_height && initialFontSize < 20) { // P5b08
-            initialFontSize++;
-            factionTextElement.style.fontSize = initialFontSize + 'px';
-          }
-        }
-    
-
 
       });
-
+      // const faction_text_max_height = 6 * parseFloat(window.getComputedStyle(factionTextElement).lineHeight);
+      // let initialFontSize = parseInt(window.getComputedStyle(factionTextElement).fontSize); // P654a
+      // const minFontSize = 6;
+      // if (factionTextElement.scrollHeight > faction_text_max_height) 
+      //   {
+      //   while (factionTextElement.scrollHeight > faction_text_max_height && initialFontSize > minFontSize) { // P5b08
+      //     initialFontSize--;
+      //     factionTextElement.style.fontSize = initialFontSize + 'px';
+      //   } 
+      // } 
+      // else 
+      // { // P677f
+      //   while (factionTextElement.scrollHeight <= faction_text_max_height && initialFontSize < 20) { // P5b08
+      //     const prevFontSize = initialFontSize;
+      //     initialFontSize++;
+      //     factionTextElement.style.fontSize = initialFontSize + 'px';
+      //     if (prevFontSize === initialFontSize) {
+      //       break;
+      //     }
+      //   }
+      // }
      
       }
 
