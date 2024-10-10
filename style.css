@@ -113,6 +113,9 @@ body {
     align-items: center;
     justify-content: center;
     height: 100%;
+    line-height: 1; /* Add this line to vertically center the text */
+    position: relative;
+    top: -5px; /* Adjust the value to move the text up */
   }
 
 .attribute-label {
@@ -120,11 +123,13 @@ body {
   font-size: 18px;
   color: black;
   position: relative;
-  top: -22px;
+  top: -500px;
   text-align: center;
   font-family: 'Trattatello', fantasy;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-  
   .pokemon-image {
     width: 100%;
     height: 200px;
