@@ -36,6 +36,10 @@ function App() {
         return newAttacks;
       });
     };
+
+    React.useEffect(() => {
+      setFactionText("■FACTION : Oath of Moment\nStart of the Fight phase, select  1   to apply to models in this unit until the end of the phase:\n■ Swords of the Imperium: Each time a model in this unit makes a melee attack, re-roll a Hit roll of 1.\n■ Shields of the Imperium: Each time an invulnerable saving throw is made for a model in this unit, re-roll a saving throw of 1");
+    }, [overlayText]);
    
     React.useEffect(() => {
       const pokemonCardTitle = document.querySelector('.pokemon-card h2');
