@@ -98,10 +98,10 @@ body {
   }
   
   .attribute-circle {
-    width: 30px;
-    height: 30px;
+    width: 33px;
+    height: 33px;
     border-radius: 50%;
-    background-color: #88303A;
+    background: linear-gradient(135deg, #381720 0%, #892E3A 52%, #B57B83 100%);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -143,7 +143,7 @@ body {
 .pokemon-image {
   padding: 10px;
   object-fit: contain;
-  background-color: #88303A;
+  background: linear-gradient(135deg, #381720 0%, #892E3A 52%, #B57B83 100%);
   border-radius: 8px;
   box-sizing: content-box;
   max-width: 80%;
