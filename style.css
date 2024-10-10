@@ -162,11 +162,11 @@ body {
   
   .attack-name {
     font-weight: bold;
-    flex: 0 0 100px;
     padding-right: 10px;
     white-space: nowrap;
-    overflow: hidden;
-    text-overflow: clip;
+    /*overflow: hidden;
+    flex: 0 0 100px;
+    text-overflow: clip;*/
   }
   .attack-values {
     display: flex;

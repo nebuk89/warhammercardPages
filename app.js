@@ -2,7 +2,7 @@ console.log('app.js loaded');
 
 function App() {
     const [name, setName] = React.useState("");
-    const [image, setImage] = React.useState(null);
+    const [image, setImage] = React.useState("https://github.com/nebuk89/FFmpeg-Builds/blob/master/Picture.png?raw=true"); // Set initial state to placeholder image
     const [attributes, setAttributes] = React.useState({
       M: 0, T: 0, SV: 0, W: 0, LD: 0, OC: 0,
     });
@@ -38,7 +38,7 @@ function App() {
     React.useEffect(() => {
       const pokemonCardTitle = document.querySelector('.pokemon-card h2');
       const attackInfoElements = document.querySelectorAll('.attack-info');
-      const maxWidth = 200;
+      const maxWidth = 240;
       const maxWidthAttack = 110;
 
       function resizeTextToFit() {
@@ -59,13 +59,13 @@ function App() {
       attackInfoElements.forEach((attackInfo) => {
         const attackName = attackInfo.querySelector('.attack-name');
         let attackFontSize = parseInt(window.getComputedStyle(attackName).fontSize);
-        if (attackName.scrollWidth > maxWidth) {
-        while (attackName.scrollWidth > maxWidth && attackFontSize > 0) {
+        if (attackName.scrollWidth > maxWidthAttack) {
+        while (attackName.scrollWidth > maxWidthAttack && attackFontSize > 0) {
           attackFontSize--;
           attackName.style.fontSize = attackFontSize + 'px';
         }
         } else {
-        while (attackName.scrollWidth < attackName.clientWidth && attackFontSize < maxWidth) {
+        while (attackName.scrollWidth < attackName.clientWidth && attackFontSize < maxWidthAttack) {
           attackFontSize++;
           attackName.style.fontSize = attackFontSize + 'px';
         }
@@ -92,7 +92,7 @@ function App() {
           <div className="input-section">
             <input
               type="text"
-              placeholder="Unit Name"
+              placeholder="Assault Intercessors"
               value={name}
               onChange={(e) => setName(e.target.value)}
             />
@@ -137,7 +137,7 @@ function App() {
             <div className="pokemon-card-wrapper">
               <div className="pokemon-card">
                 <div className="card-header">
-                  <h2>{name || "Unit Name"}</h2>
+                  <h2>{name || "Assault Intercessors"}</h2>
                   <div className="attributes">
                     {Object.entries(attributes).map(([attr, value]) => (
                       <div key={attr} className="attribute-circle">
