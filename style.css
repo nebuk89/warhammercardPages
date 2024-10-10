@@ -121,27 +121,30 @@ body {
     line-height: 1; /* Add this line to vertically center the text */
   }
 
-.attribute-label {
-  font-weight: bolder;
-  font-size: 18px;
-  color: black;
-  text-align: center;
-  font-family: 'Trattatello', fantasy;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding-bottom: 10px; /* P7177 */
-  position: absolute; /* P03e3 */
-  top: -24px; 
-}
-
-.attribute-value {
-  display: flex;
-  font-family: 'Trattatello', fantasy;
-  color: white;
-  align-items: center;
-  justify-content: center;
-} 
+  .attribute-label {
+    font-weight: bolder;
+    font-size: 18px;
+    color: black;
+    text-align: center;
+    font-family: 'Trattatello', fantasy;
+    position: absolute; /* Position it absolutely */
+    top: -30px; /* Adjust as needed to place it above the circle */
+    left: 50%;
+    transform: translateX(-50%); /* Center horizontally */
+  }
+  
+  .attribute-value {
+    display: flex;
+    font-family: 'Trattatello', fantasy;
+    color: white;
+    align-items: center;
+    justify-content: center;
+    height: 100%; /* Ensure it is fully in the middle */
+    position: absolute; /* Position it absolutely */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Center both vertically and horizontally */
+  }
 
 .pokemon-image {
   padding: 10px;
@@ -154,15 +157,16 @@ body {
 }
 
 .overlay-text {
-  position: absolute;
+  position: relative;
   top: 10px;
-  right: 10px;
+  right: -292px;
   width: 33%;
   height: 15px;
-  background-color: red;
+  background: linear-gradient(135deg, #381720 0%, #892E3A 52%, #B57B83 100%);
   transform: skew(-20deg);
   color: white;
   text-align: center;
+  font-size: small;
   line-height: 15px;
   font-family: 'Trattatello', fantasy;
 }

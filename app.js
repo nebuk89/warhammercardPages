@@ -148,8 +148,8 @@ function App() {
                     ))}
                   </div>
                 </div>
-                {image && <img src={image} alt="Unit" className="pokemon-image" />}
                 <div className="overlay-text">Adeptus Astartes, Blood Angels</div>
+                {image && <img src={image} alt="Unit" className="pokemon-image" />}
                 <div className="attacks">
                   <div className="attack-labels">
                     <span></span>
