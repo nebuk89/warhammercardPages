@@ -84,27 +84,53 @@ function App() {
 
 
       });
-      // const faction_text_max_height = 6 * parseFloat(window.getComputedStyle(factionTextElement).lineHeight);
-      // let initialFontSize = parseInt(window.getComputedStyle(factionTextElement).fontSize); // P654a
-      // const minFontSize = 6;
-      // if (factionTextElement.scrollHeight > faction_text_max_height) 
-      //   {
-      //   while (factionTextElement.scrollHeight > faction_text_max_height && initialFontSize > minFontSize) { // P5b08
-      //     initialFontSize--;
-      //     factionTextElement.style.fontSize = initialFontSize + 'px';
-      //   } 
-      // } 
-      // else 
-      // { // P677f
-      //   while (factionTextElement.scrollHeight <= faction_text_max_height && initialFontSize < 20) { // P5b08
-      //     const prevFontSize = initialFontSize;
-      //     initialFontSize++;
-      //     factionTextElement.style.fontSize = initialFontSize + 'px';
-      //     if (prevFontSize === initialFontSize) {
-      //       break;
-      //     }
-      //   }
-      // }
+       
+      
+
+      
+     
+       
+      
+        const faction_text_max_height = 6 * parseFloat(window.getComputedStyle(factionTextElement).lineHeight);
+        let factionFontSize = parseInt(window.getComputedStyle(factionTextElement).fontSize);
+        const minFontSize = 6;
+        const maxFontSize = 100; // Set a reasonable upper limit
+      
+        function reduce() {
+          if (factionTextElement.scrollHeight > faction_text_max_height && factionFontSize > minFontSize) {
+            factionFontSize--;
+            factionTextElement.style.fontSize = factionFontSize + 'px';
+            requestAnimationFrame(reduce);
+          } else {
+            // Once reduction is complete, start increasing
+            requestAnimationFrame(increase);
+          }
+        }
+      
+        function increase() {
+          if (factionTextElement.scrollHeight <= faction_text_max_height && factionFontSize < maxFontSize) {
+            factionFontSize++;
+            factionTextElement.style.fontSize = factionFontSize + 'px';
+            requestAnimationFrame(increase);
+          } else {
+            // If we've gone too far, revert to the last good size
+            factionFontSize--;
+            factionTextElement.style.fontSize = factionFontSize + 'px';
+          }
+        }
+      
+        if (factionTextElement.scrollHeight > faction_text_max_height) {
+          requestAnimationFrame(reduce);
+        } else {
+          requestAnimationFrame(increase);
+        }
+      
+      
+        if (factionTextElement.scrollHeight > faction_text_max_height) {
+          requestAnimationFrame(reduce);
+        } else {
+          requestAnimationFrame(increase);
+        }
      
       }
 
