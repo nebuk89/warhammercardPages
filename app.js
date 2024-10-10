@@ -34,10 +34,60 @@ function App() {
         return newAttacks;
       });
     };
+   
+    React.useEffect(() => {
+      const pokemonCardTitle = document.querySelector('.pokemon-card h2');
+      const attackInfoElements = document.querySelectorAll('.attack-info');
+      const maxWidth = 200;
+      const maxWidthAttack = 110;
+
+      function resizeTextToFit() {
+      let fontSize = parseInt(window.getComputedStyle(pokemonCardTitle).fontSize);
+      if (pokemonCardTitle.scrollWidth > maxWidth) {
+        while (pokemonCardTitle.scrollWidth > maxWidth && fontSize > 0) {
+        fontSize--;
+        pokemonCardTitle.style.fontSize = fontSize + 'px';
+        }
+      } else {
+        while (pokemonCardTitle.scrollWidth < pokemonCardTitle.clientWidth && fontSize < maxWidth) {
+        fontSize++;
+        pokemonCardTitle.style.fontSize = fontSize + 'px';
+        }
+      }
+      pokemonCardTitle.style.whiteSpace = 'nowrap'; // Add this line to prevent text wrapping
+
+      attackInfoElements.forEach((attackInfo) => {
+        const attackName = attackInfo.querySelector('.attack-name');
+        let attackFontSize = parseInt(window.getComputedStyle(attackName).fontSize);
+        if (attackName.scrollWidth > maxWidth) {
+        while (attackName.scrollWidth > maxWidth && attackFontSize > 0) {
+          attackFontSize--;
+          attackName.style.fontSize = attackFontSize + 'px';
+        }
+        } else {
+        while (attackName.scrollWidth < attackName.clientWidth && attackFontSize < maxWidth) {
+          attackFontSize++;
+          attackName.style.fontSize = attackFontSize + 'px';
+        }
+        }
+        attackName.style.whiteSpace = 'nowrap'; // Add this line to prevent text wrapping
+      });
+      }
+
+      resizeTextToFit();
+      window.addEventListener('resize', resizeTextToFit);
+      window.addEventListener('input', resizeTextToFit);
+
+      return () => {
+      window.removeEventListener('resize', resizeTextToFit);
+      window.removeEventListener('input', resizeTextToFit);
+      };
+    }, [name]); // Add 'name' as a dependency to the useEffect hook
+
   
     return (
       <div className="container">
-        <h1>Custom Warhammer Card Creator</h1>
+        <h1>Custom Warhammer Card Creator 0</h1>
         <div className="card-creator">
           <div className="input-section">
             <input
