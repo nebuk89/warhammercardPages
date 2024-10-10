@@ -1,3 +1,5 @@
+console.log('app.js loaded');
+
 function App() {
     const [name, setName] = React.useState("");
     const [image, setImage] = React.useState(null);
@@ -126,4 +128,10 @@ function App() {
     );
   }
   
+  try {
   ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+  console.log('React component rendered successfully');
+} catch (error) {
+  console.error('Error rendering React component:', error);
+  document.getElementById('debug').innerHTML += '<br>Error rendering React component. Check console for details.';
+}
