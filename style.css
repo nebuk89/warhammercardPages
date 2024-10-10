@@ -268,9 +268,11 @@ body {
 }
 
 .faction-text {
-  border: 2px solid yellow;
+  border: 2px solid;
+  border-image: linear-gradient(135deg, #BFA100 0%, #E4D895 21%, #DEA722 37%, #E6CF0E 57%, #CB9705 81%, #92611A 100%);
+  border-image-slice: 1;
   width: 80%;
-  height: calc(80% / 3);
+  height: 93px;
   margin: 10px auto;
   color: black;
   text-align: center;
