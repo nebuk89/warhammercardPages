@@ -1,3 +1,9 @@
+#debug {
+  background-color: yellow;
+  padding: 10px;
+  margin-bottom: 20px;
+}
+
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: #f0f0f0;
