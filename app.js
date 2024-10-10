@@ -7,6 +7,7 @@ function App() {
       M: 0, T: 0, SV: 0, W: 0, LD: 0, OC: 0,
     });
     const [attacks, setAttacks] = React.useState([]);
+    const [overlayText, setOverlayText] = React.useState(""); 
   
     const handleImageUpload = (e) => {
       const file = e.target.files[0];
@@ -93,9 +94,15 @@ function App() {
           <div className="input-section">
             <input
               type="text"
-              placeholder="Assault Intercessors"
+              placeholder="Unit Name"
               value={name}
               onChange={(e) => setName(e.target.value)}
+            />
+             <input // P76ad
+              type="text"
+              placeholder="Keywords"
+              value={overlayText}
+              onChange={(e) => setOverlayText(e.target.value)} // P5b03
             />
             <input type="file" accept="image/*" onChange={handleImageUpload} />
             <h3>Attributes</h3>
@@ -133,6 +140,7 @@ function App() {
               </div>
             ))}
             <button onClick={addAttack}>Add Attack</button>
+           
           </div>
           <div className="card-preview">
             <div className="pokemon-card-wrapper">
@@ -148,7 +156,7 @@ function App() {
                     ))}
                   </div>
                 </div>
-                <div className="overlay-text">Adeptus Astartes, Blood Angels</div>
+                <div className="overlay-text">{overlayText || "Adeptus Astartes, Blood Angels"}</div>
                 {image && <img src={image} alt="Unit" className="pokemon-image" />}
                 <div className="attacks">
                   <div className="attack-labels">
