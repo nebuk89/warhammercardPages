@@ -55,6 +55,7 @@ function App() {
         }
       }
       pokemonCardTitle.style.whiteSpace = 'nowrap'; // Add this line to prevent text wrapping
+      
 
       attackInfoElements.forEach((attackInfo) => {
         const attackName = attackInfo.querySelector('.attack-name');
