@@ -82,7 +82,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center; /* Align items vertically in the center */
-    margin-bottom: 20px;
+    margin-bottom: -15px;
   }
   
   .pokemon-card h2 {
@@ -166,7 +166,7 @@ body {
   transform: skew(-20deg);
   color: white;
   text-align: center;
-  font-size: small;
+  font-size: 12px;
   line-height: 15px;
   font-family: 'Trattatello', fantasy;
   border-bottom: 2px solid; /* Required for border-image to work */
