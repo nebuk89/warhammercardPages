@@ -171,6 +171,19 @@ body {
   font-family: 'Trattatello', fantasy;
 }
 
+.keywords {
+  height: 20%;
+  width: 90%;
+  margin: 0 auto;
+  background-color: red;
+  color: white;
+  text-align: center;
+  font-size: small;
+  line-height: 1.5;
+  font-family: 'Trattatello', fantasy;
+  transform: skew(-20deg);
+}
+
   
   .attacks {
     background-color: rgba(255, 255, 255, 0.7);
