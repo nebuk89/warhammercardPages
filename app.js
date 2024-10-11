@@ -88,9 +88,6 @@ function App() {
      
       }
 
-// HTML structure (for reference)
-// <textarea id="faction-text-input"></textarea>
-// <div class="faction-text"></div>
 
 const inputBox = document.getElementById('faction-text-input');
 const factionText = document.querySelector('.faction-text');
