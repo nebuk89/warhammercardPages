@@ -183,18 +183,47 @@ function App() {
     // Function to handle exporting to PNG
     const handleExportToPNG = () => {
       const cardWrapper = document.querySelector('.pokemon-card-wrapper');
-      html2canvas(cardWrapper, { backgroundColor: null, scale: 2, useCORS: true, allowTaint: true, foreignObjectRendering: true }).then(canvas => {
-        const imgData = canvas.toDataURL('image/png');
-        const link = document.createElement('a');
-        link.href = imgData;
-        link.download = 'card.png';
-        link.click();
-      });
+      
+      // Ensure the element exists
+      if (!cardWrapper) {
+        console.error('Card wrapper not found');
+        return;
+      }
+    
+      // Add a small delay to ensure content is rendered
+      setTimeout(() => {
+        html2canvas(cardWrapper, {
+          backgroundColor: null,
+          scale: 2,
+          useCORS: true,
+          allowTaint: true,
+          foreignObjectRendering: true,
+          logging: true, // Enable logging for debugging
+          onclone: (document) => {
+            // You can manipulate the cloned document here if needed
+            const clonedElement = document.querySelector('.pokemon-card-wrapper');
+            // Ensure the cloned element is visible
+            if (clonedElement) {
+              clonedElement.style.display = 'block';
+              clonedElement.style.visibility = 'visible';
+            }
+          }
+        }).then(canvas => {
+          const imgData = canvas.toDataURL('image/png');
+          const link = document.createElement('a');
+          link.href = imgData;
+          link.download = 'card.png';
+          link.click();
+        }).catch(error => {
+          console.error('Error in html2canvas', error);
+        });
+      }, 100); // 100ms delay
+  
     };
 
     return (
       <div className="container">
-        <h1>Custom Warhammer Card Creator WIP 2</h1>
+        <h1>Custom Warhammer Card Creator WIP</h1>
         <div className="card-creator">
           <div className="input-section">
             <button onClick={handleExportToPNG}>Export to PNG</button>
