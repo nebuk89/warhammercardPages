@@ -127,4 +127,17 @@ describe('App Component', () => {
     expect(imageRect.left).toBeCloseTo(pokemonImageRect.right - imageRect.width / 2);
     expect(imageRect.top).toBeCloseTo(pokemonImageRect.bottom - imageRect.height / 2);
   });
+
+  test('should ensure the invulnerable-save image remains in its initial position when the attacks object changes', () => {
+    const { getByLabelText, getByAltText, getByText } = render(<App />);
+    const tickBox = getByLabelText('Show Image');
+    fireEvent.click(tickBox);
+    const image = getByAltText('Invulnerable Save');
+    const initialRect = image.getBoundingClientRect();
+    const addButton = getByText('Add Attack');
+    fireEvent.click(addButton);
+    const newRect = image.getBoundingClientRect();
+    expect(newRect.top).toBe(initialRect.top);
+    expect(newRect.left).toBe(initialRect.left);
+  });
 });
