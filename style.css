@@ -287,8 +287,11 @@ body {
   text-overflow: ellipsis;
   display: -webkit-box;
   -webkit-box-orient: vertical;
-  line-clamp: 2;
-  word-wrap: break-word; /* Add this line to enable text wrapping */
+  -webkit-line-clamp: 2; /* Ensure this is correct */
+  line-clamp: 2; /* Add this line for non-webkit browsers */
+  max-height: 3em; /* Adjust based on your line-height */
+  line-height: 1.5; /* Ensure this matches your desired line height */
+  word-wrap: break-word; /* Ensure text wrapping */
 }
 
 @media (max-width: 768px) {
