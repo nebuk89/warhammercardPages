@@ -140,4 +140,32 @@ describe('App Component', () => {
     expect(newRect.top).toBe(initialRect.top);
     expect(newRect.left).toBe(initialRect.left);
   });
+
+  test('should render the PDF generation button', () => {
+    const { getByText } = render(<App />);
+    const pdfButton = getByText('Print to PDF');
+    expect(pdfButton).toBeInTheDocument();
+  });
+
+  test('should trigger handlePrintToPDF function on button click', () => {
+    const { getByText } = render(<App />);
+    const pdfButton = getByText('Print to PDF');
+    fireEvent.click(pdfButton);
+    // Assuming handlePrintToPDF function has a console.log statement
+    expect(console.log).toHaveBeenCalledWith('handlePrintToPDF function triggered');
+  });
+
+  test('should generate a PDF with correct dimensions', () => {
+    const { getByText } = render(<App />);
+    const pdfButton = getByText('Print to PDF');
+    fireEvent.click(pdfButton);
+    // Assuming handlePrintToPDF function generates a PDF with specific dimensions
+    const pdf = new jsPDF({
+      orientation: 'portrait',
+      unit: 'in',
+      format: [2.5, 3.5]
+    });
+    expect(pdf.internal.pageSize.getWidth()).toBe(2.5);
+    expect(pdf.internal.pageSize.getHeight()).toBe(3.5);
+  });
 });

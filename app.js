@@ -180,6 +180,21 @@ function App() {
       }
     }, [attacks]);
 
+    // Function to handle printing to PDF
+    const handlePrintToPDF = () => {
+      const cardWrapper = document.querySelector('.pokemon-card-wrapper');
+      html2canvas(cardWrapper).then(canvas => {
+        const imgData = canvas.toDataURL('image/png');
+        const pdf = new jsPDF({
+          orientation: 'portrait',
+          unit: 'in',
+          format: [2.5, 3.5]
+        });
+        pdf.addImage(imgData, 'PNG', 0, 0, 2.5, 3.5);
+        pdf.save('card.pdf');
+      });
+    };
+
     return (
       <div className="container">
         <h1>Custom Warhammer Card Creator WIP</h1>
@@ -259,6 +274,7 @@ function App() {
                 Invulnerable Save
               </label>
             </div>
+            <button onClick={handlePrintToPDF}>Print to PDF</button>
           </div>
           <div className="card-preview">
             <div className="pokemon-card-wrapper">
