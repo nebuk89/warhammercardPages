@@ -283,6 +283,12 @@ body {
   flex: 0 0 50px;
   font-size: 15px;
   text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  line-clamp: 2;
+  word-wrap: break-word; /* Add this line to enable text wrapping */
 }
 
 @media (max-width: 768px) {
