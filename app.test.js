@@ -175,7 +175,7 @@ describe('App Component', () => {
     const pdfButton = getByText('Print to PDF');
     fireEvent.click(pdfButton);
     const cardWrapper = document.querySelector('.pokemon-card-wrapper');
-    html2canvas(cardWrapper).then(canvas => {
+    html2canvas(cardWrapper, { background: '#fff', useCORS: true }).then(canvas => {
       const imgData = canvas.toDataURL('image/png');
       expect(imgData).toContain('data:image/png;base64');
     });
