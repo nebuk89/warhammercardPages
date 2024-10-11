@@ -187,6 +187,13 @@ function App() {
       }
     }, [attacks]);
 
+    // Effect to update the text content of the invulnerable-save object when saveValue changes
+    React.useEffect(() => {
+      if (invulnerableSaveRef.current) {
+        invulnerableSaveRef.current.textContent = saveValue;
+      }
+    }, [saveValue]);
+
     // Function to handle exporting to Image
     const handleExportToImage = () => {
       //const cardWrapper = document.querySelector('.pokemon-card-wrapper');
@@ -325,7 +332,11 @@ function App() {
                 </div>
                 <div className="overlay-text">{overlayText || "Adeptus Astartes, Blood Angels"}</div>
                 {image && <img src={image} alt="Unit" className="pokemon-image" />}
-                {showImage && <img src="/resources/invulnerable_img.png" alt="Overlay" className="invulnerable-save" ref={invulnerableSaveRef} style={{ top: initialPosition.current.top, left: initialPosition.current.left }} />}
+                {showImage && (
+                  <div className="invulnerable-save" ref={invulnerableSaveRef} style={{ top: initialPosition.current.top, left: initialPosition.current.left }}>
+                    {saveValue}
+                  </div>
+                )}
                 <div className="keywords">Infantry, Grenades, Imperium, Tacticus, Bladeguard Veteran Squad</div>
                 
                 <div className="attacks">

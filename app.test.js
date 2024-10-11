@@ -299,4 +299,14 @@ describe('App Component', () => {
     fireEvent.change(numberSelector, { target: { value: '5' } });
     expect(numberSelector.value).toBe('5');
   });
+
+  test('should overlay saveValue on invulnerable-save object when tick box is set to two', () => {
+    const { getByLabelText, getByText } = render(<App />);
+    const tickBox = getByLabelText('Invulnerable Save');
+    fireEvent.click(tickBox);
+    const numberSelector = getByText('Save Value:');
+    fireEvent.change(numberSelector, { target: { value: '2' } });
+    const invulnerableSave = getByText('2');
+    expect(invulnerableSave).toBeInTheDocument();
+  });
 });
