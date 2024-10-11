@@ -333,8 +333,8 @@ function App() {
                 <div className="overlay-text">{overlayText || "Adeptus Astartes, Blood Angels"}</div>
                 {image && <img src={image} alt="Unit" className="pokemon-image" />}
                 {showImage && (
-                  <div className="invulnerable-save" ref={invulnerableSaveRef} style={{ top: initialPosition.current.top, left: initialPosition.current.left }}>
-                    {saveValue}
+                  <div className="invulnerable-save"  ref={invulnerableSaveRef} style={{ top: initialPosition.current.top, left: initialPosition.current.left }}>
+                    {saveValue}+
                   </div>
                 )}
                 <div className="keywords">Infantry, Grenades, Imperium, Tacticus, Bladeguard Veteran Squad</div>

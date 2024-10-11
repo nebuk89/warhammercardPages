@@ -312,8 +312,14 @@ body {
 
 .invulnerable-save {
   position: absolute;
-  background: none; 
-  width: 100px;
-  height: 110px;
+  background: url('resources/invulnerable_img.png') no-repeat center center;
+  background-size: cover;
+  width: 70px;
+  height: 77px;
   transform: translate(20%, 50%);
+  color: white;
+  font-size: 2.1em;
+  /* Add the following properties to move the font down and to the right */
+  padding-top: 28px;
+  padding-left: 28px;
 }
