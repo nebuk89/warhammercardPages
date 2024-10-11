@@ -60,17 +60,17 @@ describe('App Component', () => {
     const { getByText, getAllByPlaceholderText } = render(<App />);
     const addButton = getByText('Add Attack');
     fireEvent.click(addButton);
-    const newFieldInput = getAllByPlaceholderText('New Field')[0];
-    fireEvent.change(newFieldInput, { target: { value: 'Test New Field' } });
-    expect(newFieldInput.value).toBe('Test New Field');
+    const otherAttackAttributesInput = getAllByPlaceholderText('Other Attack Attributes')[0];
+    fireEvent.change(otherAttackAttributesInput, { target: { value: 'Test Other Attack Attributes' } });
+    expect(otherAttackAttributesInput.value).toBe('Test Other Attack Attributes');
   });
 
   test('should update new text entry state correctly', () => {
     const { getByText, getAllByPlaceholderText } = render(<App />);
     const addButton = getByText('Add Attack');
     fireEvent.click(addButton);
-    const newFieldInput = getAllByPlaceholderText('New Field')[0];
-    fireEvent.change(newFieldInput, { target: { value: 'Test New Field' } });
-    expect(newFieldInput.value).toBe('Test New Field');
+    const otherAttackAttributesInput = getAllByPlaceholderText('Other Attack Attributes')[0];
+    fireEvent.change(otherAttackAttributesInput, { target: { value: 'Test Other Attack Attributes' } });
+    expect(otherAttackAttributesInput.value).toBe('Test Other Attack Attributes');
   });
 });
