@@ -2,7 +2,7 @@ console.log('app.js loaded');
 
 function App() {
     const [name, setName] = React.useState("");
-    const [image, setImage] = React.useState("local-image-url.png"); // Set initial state to local image URL
+    const [image, setImage] = React.useState("/resources/blade_guard_sample.png"); // Set initial state to image URL in the resources folder
     const [attributes, setAttributes] = React.useState({
       M: 0, T: 0, SV: 0, W: 0, LD: 0, OC: 0,
     });
@@ -291,7 +291,7 @@ function App() {
                 </div>
                 <div className="overlay-text">{overlayText || "Adeptus Astartes, Blood Angels"}</div>
                 {image && <img src={image} alt="Unit" className="pokemon-image" />}
-                {showImage && <img src="https://github.com/nebuk89/FFmpeg-Builds/blob/master/image%2016.png?raw=true" alt="Overlay" className="invulnerable-save" ref={invulnerableSaveRef} style={{ top: initialPosition.current.top, left: initialPosition.current.left }} />}
+                {showImage && <img src="/resources/invulnerable_img.png" alt="Overlay" className="invulnerable-save" ref={invulnerableSaveRef} style={{ top: initialPosition.current.top, left: initialPosition.current.left }} />}
                 <div className="keywords">Infantry, Grenades, Imperium, Tacticus, Bladeguard Veteran Squad</div>
                 
                 <div className="attacks">
