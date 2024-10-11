@@ -101,4 +101,18 @@ describe('App Component', () => {
     const fifthAttributeValue = getByText(/0\+/);
     expect(fifthAttributeValue).toBeInTheDocument();
   });
+
+  test('should render the tick box', () => {
+    const { getByLabelText } = render(<App />);
+    const tickBox = getByLabelText('Show Image');
+    expect(tickBox).toBeInTheDocument();
+  });
+
+  test('should render the image when the tick box is checked', () => {
+    const { getByLabelText, getByAltText } = render(<App />);
+    const tickBox = getByLabelText('Show Image');
+    fireEvent.click(tickBox);
+    const image = getByAltText('Overlay');
+    expect(image).toBeInTheDocument();
+  });
 });
