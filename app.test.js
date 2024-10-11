@@ -112,7 +112,19 @@ describe('App Component', () => {
     const { getByLabelText, getByAltText } = render(<App />);
     const tickBox = getByLabelText('Show Image');
     fireEvent.click(tickBox);
-    const image = getByAltText('Overlay');
+    const image = getByAltText('Invulnerable Save');
     expect(image).toBeInTheDocument();
+  });
+
+  test('should position the invulnerable-save image correctly', () => {
+    const { getByLabelText, getByAltText } = render(<App />);
+    const tickBox = getByLabelText('Show Image');
+    fireEvent.click(tickBox);
+    const image = getByAltText('Invulnerable Save');
+    const pokemonImage = getByAltText('Unit');
+    const pokemonImageRect = pokemonImage.getBoundingClientRect();
+    const imageRect = image.getBoundingClientRect();
+    expect(imageRect.left).toBeCloseTo(pokemonImageRect.right - imageRect.width / 2);
+    expect(imageRect.top).toBeCloseTo(pokemonImageRect.bottom - imageRect.height / 2);
   });
 });
