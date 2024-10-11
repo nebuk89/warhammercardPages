@@ -242,7 +242,7 @@ function App() {
                   checked={showImage}
                   onChange={handleShowImageToggle}
                 />
-                Show Image
+                Invulnerable Save
               </label>
             </div>
           </div>
