@@ -239,7 +239,9 @@ function App() {
                     {Object.entries(attributes).map(([attr, value], index) => (
                       <div key={attr} className="attribute-circle">
                         <span className="attribute-label">{attr}</span>
-                        <span className="attribute-value">{index === 0 ? `${value}"` : value}</span>
+                        <span className="attribute-value">
+                          {index === 0 ? `${value}"` : index === 2 || index === 4 ? `${value}+` : value}
+                        </span>
                       </div>
                     ))}
                   </div>
