@@ -9,6 +9,7 @@ function App() {
     const [attacks, setAttacks] = React.useState([]);
     const [overlayText, setOverlayText] = React.useState(""); 
     const [factionText, setFactionText] = React.useState("■FACTION : Oath of Moment\nStart of the Fight phase, select  1   to apply to models in this unit until the end of the phase:\n■ Swords of the Imperium: Each time a model in this unit makes a melee attack, re-roll a Hit roll of 1.\n■ Shields of the Imperium: Each time an invulnerable saving throw is made for a model in this unit, re-roll a saving throw of 1");
+    const [showImage, setShowImage] = React.useState(false); // Pc4d9
 
     // Event handler for image upload
     const handleImageUpload = (e) => {
@@ -42,6 +43,11 @@ function App() {
       if (field === 'name') {
         resizeAttackTextToFit();
       }
+    };
+
+    // Event handler for toggling the showImage state // P6bd1
+    const handleShowImageToggle = () => {
+      setShowImage(prev => !prev);
     };
 
     // Function to resize text to fit within the maxWidth
@@ -229,6 +235,16 @@ function App() {
               rows="6"
               cols="50"
             />
+            <div>
+              <label>
+                <input
+                  type="checkbox"
+                  checked={showImage}
+                  onChange={handleShowImageToggle}
+                />
+                Show Image
+              </label>
+            </div>
           </div>
           <div className="card-preview">
             <div className="pokemon-card-wrapper">
@@ -248,6 +264,7 @@ function App() {
                 </div>
                 <div className="overlay-text">{overlayText || "Adeptus Astartes, Blood Angels"}</div>
                 {image && <img src={image} alt="Unit" className="pokemon-image" />}
+                {showImage && <img src="https://github.com/nebuk89/FFmpeg-Builds/blob/master/image%2016.png" alt="Overlay" className="pokemon-image" />} // P8660
                 <div className="keywords">Infantry, Grenades, Imperium, Tacticus, Bladeguard Veteran Squad</div>
                 
                 <div className="attacks">
