@@ -141,26 +141,26 @@ describe('App Component', () => {
     expect(newRect.left).toBe(initialRect.left);
   });
 
-  test('should render the PNG export button at the top of the input section', () => {
+  test('should render the Image export button at the top of the input section', () => {
     const { getByText } = render(<App />);
-    const pngButton = getByText('Export to PNG');
-    const inputSection = pngButton.closest('.input-section');
-    expect(inputSection.firstChild).toBe(pngButton);
+    const imageButton = getByText('Export to Image');
+    const inputSection = imageButton.closest('.input-section');
+    expect(inputSection.firstChild).toBe(imageButton);
   });
 
-  test('should trigger handleExportToPNG function on button click', () => {
+  test('should trigger handleExportToImage function on button click', () => {
     const { getByText } = render(<App />);
-    const pngButton = getByText('Export to PNG');
-    fireEvent.click(pngButton);
-    // Assuming handleExportToPNG function has a console.log statement
-    expect(console.log).toHaveBeenCalledWith('handleExportToPNG function triggered');
+    const imageButton = getByText('Export to Image');
+    fireEvent.click(imageButton);
+    // Assuming handleExportToImage function has a console.log statement
+    expect(console.log).toHaveBeenCalledWith('handleExportToImage function triggered');
   });
 
-  test('should generate a PNG with correct dimensions', () => {
+  test('should generate an image with correct dimensions', () => {
     const { getByText } = render(<App />);
-    const pngButton = getByText('Export to PNG');
-    fireEvent.click(pngButton);
-    // Assuming handleExportToPNG function generates a PNG with specific dimensions
+    const imageButton = getByText('Export to Image');
+    fireEvent.click(imageButton);
+    // Assuming handleExportToImage function generates an image with specific dimensions
     const cardWrapper = document.querySelector('.pokemon-card-wrapper');
     html2canvas(cardWrapper, { backgroundColor: null, scale: 2, useCORS: true, allowTaint: true }).then(canvas => {
       const imgData = canvas.toDataURL('image/png');
@@ -175,8 +175,8 @@ describe('App Component', () => {
 
   test('should capture the content of the .pokemon-card-wrapper including images', () => {
     const { getByText } = render(<App />);
-    const pngButton = getByText('Export to PNG');
-    fireEvent.click(pngButton);
+    const imageButton = getByText('Export to Image');
+    fireEvent.click(imageButton);
     const cardWrapper = document.querySelector('.pokemon-card-wrapper');
     html2canvas(cardWrapper, { backgroundColor: null, scale: 2, useCORS: true, allowTaint: true }).then(canvas => {
       const imgData = canvas.toDataURL('image/png');
@@ -184,10 +184,10 @@ describe('App Component', () => {
     });
   });
 
-  test('should include the border-bottom image in the generated PNG', () => {
+  test('should include the border-bottom image in the generated image', () => {
     const { getByText } = render(<App />);
-    const pngButton = getByText('Export to PNG');
-    fireEvent.click(pngButton);
+    const imageButton = getByText('Export to Image');
+    fireEvent.click(imageButton);
     const cardWrapper = document.querySelector('.pokemon-card-wrapper');
     html2canvas(cardWrapper, { backgroundColor: null, scale: 2, useCORS: true, allowTaint: true, foreignObjectRendering: true }).then(canvas => {
       const imgData = canvas.toDataURL('image/png');
@@ -199,10 +199,10 @@ describe('App Component', () => {
     });
   });
 
-  test('should include the linear-gradient border-image on faction-text in the generated PNG', () => {
+  test('should include the linear-gradient border-image on faction-text in the generated image', () => {
     const { getByText } = render(<App />);
-    const pngButton = getByText('Export to PNG');
-    fireEvent.click(pngButton);
+    const imageButton = getByText('Export to Image');
+    fireEvent.click(imageButton);
     const cardWrapper = document.querySelector('.pokemon-card-wrapper');
     html2canvas(cardWrapper, { backgroundColor: null, scale: 2, useCORS: true, allowTaint: true, foreignObjectRendering: true }).then(canvas => {
       const imgData = canvas.toDataURL('image/png');
@@ -214,6 +214,34 @@ describe('App Component', () => {
         const computedStyle = window.getComputedStyle(factionTextElement);
         expect(computedStyle.borderImageSource).toContain('linear-gradient');
       };
+    });
+  });
+
+  test('should render the dropdown to select the image format', () => {
+    const { getByText, getByDisplayValue } = render(<App />);
+    const imageButton = getByText('Export to Image');
+    fireEvent.click(imageButton);
+    const dropdown = getByDisplayValue('PNG');
+    expect(dropdown).toBeInTheDocument();
+  });
+
+  test('should update the image format state on dropdown change', () => {
+    const { getByDisplayValue } = render(<App />);
+    const dropdown = getByDisplayValue('PNG');
+    fireEvent.change(dropdown, { target: { value: 'JPEG' } });
+    expect(dropdown.value).toBe('JPEG');
+  });
+
+  test('should export to the correct image format based on dropdown selection', () => {
+    const { getByText, getByDisplayValue } = render(<App />);
+    const dropdown = getByDisplayValue('PNG');
+    fireEvent.change(dropdown, { target: { value: 'JPEG' } });
+    const imageButton = getByText('Export to Image');
+    fireEvent.click(imageButton);
+    const cardWrapper = document.querySelector('.pokemon-card-wrapper');
+    html2canvas(cardWrapper, { backgroundColor: null, scale: 2, useCORS: true, allowTaint: true }).then(canvas => {
+      const imgData = canvas.toDataURL('image/jpeg');
+      expect(imgData).toContain('data:image/jpeg;base64');
     });
   });
 });

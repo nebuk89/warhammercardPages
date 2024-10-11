@@ -12,6 +12,7 @@ function App() {
     const [showImage, setShowImage] = React.useState(false); // Pc4d9
     const invulnerableSaveRef = React.useRef(null); // Pb848
     const initialPosition = React.useRef({ top: 0, left: 0 }); // Pb848
+    const [imageFormat, setImageFormat] = React.useState("png"); // Pda30
 
     // Event handler for image upload
     const handleImageUpload = (e) => {
@@ -180,8 +181,8 @@ function App() {
       }
     }, [attacks]);
 
-    // Function to handle exporting to PNG
-    const handleExportToPNG = () => {
+    // Function to handle exporting to Image
+    const handleExportToImage = () => {
       const cardWrapper = document.querySelector('.pokemon-card-wrapper');
       
       // Ensure the element exists
@@ -209,10 +210,10 @@ function App() {
             }
           }
         }).then(canvas => {
-          const imgData = canvas.toDataURL('image/png');
+          const imgData = canvas.toDataURL(`image/${imageFormat}`);
           const link = document.createElement('a');
           link.href = imgData;
-          link.download = 'card.png';
+          link.download = `card.${imageFormat}`;
           link.click();
         }).catch(error => {
           console.error('Error in html2canvas', error);
@@ -226,7 +227,13 @@ function App() {
         <h1>Custom Warhammer Card Creator WIP</h1>
         <div className="card-creator">
           <div className="input-section">
-            <button onClick={handleExportToPNG}>Export to PNG</button>
+            <button onClick={handleExportToImage}>Export to Image</button>
+            <select value={imageFormat} onChange={(e) => setImageFormat(e.target.value)}>
+              <option value="png">PNG</option>
+              <option value="jpeg">JPEG</option>
+              <option value="bmp">BMP</option>
+              <option value="gif">GIF</option>
+            </select>
             <input
               type="text"
               placeholder="Unit Name"
