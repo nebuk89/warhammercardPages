@@ -70,7 +70,7 @@ body {
   }
   
   .pokemon-card {
-    background-image: url('https://github.com/nebuk89/FFmpeg-Builds/blob/master/image%2010.png?raw=true');
+     background-image: url('https://github.com/nebuk89/FFmpeg-Builds/blob/master/image%2010.png?raw=true');
     background-size: cover;
     background-position: center;
     border-radius: 10px;
