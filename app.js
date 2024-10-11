@@ -36,7 +36,7 @@ function App() {
     const updateAttack = (index, field, value) => {
       setAttacks(prev => {
         const newAttacks = [...prev];
-        newAttacks[index] = { ...newAttacks[index], [field]: field === 'name' || field === 'newField' ? value : parseInt(value) };
+        newAttacks[index] = { ...newAttacks[index], [field]: field === 'name' || field === 'otherAttackAttributes' ? value : parseInt(value) };
         return newAttacks;
       });
       if (field === 'name') {
@@ -88,17 +88,17 @@ function App() {
           }
         }
 
-        const newField = attackInfo.querySelector('.new-field');
-        let newFieldFontSize = parseInt(window.getComputedStyle(newField).fontSize);
-        if (newField.scrollWidth > maxWidthAttack / 2) {
-          while (newField.scrollWidth > maxWidthAttack / 2 && newFieldFontSize > 0) {
-            newFieldFontSize--;
-            newField.style.fontSize = newFieldFontSize + 'px';
+        const otherAttackAttributes = attackInfo.querySelector('.other-attack-attributes');
+        let otherAttackAttributesFontSize = parseInt(window.getComputedStyle(otherAttackAttributes).fontSize);
+        if (otherAttackAttributes.scrollWidth > maxWidthAttack / 2) {
+          while (otherAttackAttributes.scrollWidth > maxWidthAttack / 2 && otherAttackAttributesFontSize > 0) {
+            otherAttackAttributesFontSize--;
+            otherAttackAttributes.style.fontSize = otherAttackAttributesFontSize + 'px';
           }
         } else {
-          while (newField.scrollWidth < newField.clientWidth && newFieldFontSize < maxWidthAttack / 2) {
-            newFieldFontSize++;
-            newField.style.fontSize = newFieldFontSize + 'px';
+          while (otherAttackAttributes.scrollWidth < otherAttackAttributes.clientWidth && otherAttackAttributesFontSize < maxWidthAttack / 2) {
+            otherAttackAttributesFontSize++;
+            otherAttackAttributes.style.fontSize = otherAttackAttributesFontSize + 'px';
           }
         }
       });
@@ -212,8 +212,8 @@ function App() {
                     <label>Other stats</label>
                     <input
                       type="text"
-                      value={attack.newField}
-                      onChange={(e) => updateAttack(index, "newField", e.target.value)}
+                      value={attack.otherAttackAttributes}
+                      onChange={(e) => updateAttack(index, "otherAttackAttributes", e.target.value)}
                     />
                   </div>
                 </div>
@@ -266,7 +266,7 @@ function App() {
                         <span className="stat-value">{attack.S}</span>
                         <span className="stat-value">{attack.AP}</span>
                         <span className="stat-value">{attack.D}</span>
-                        <span className="new-field">{attack.newField}</span>
+                        <span className="other-attack-attributes">{attack.otherAttackAttributes}</span>
                       </div>
                     </div>
                   ))}
