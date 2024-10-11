@@ -182,7 +182,7 @@ function App() {
 
     return (
       <div className="container">
-        <h1>Custom Warhammer Card Creator 1</h1>
+        <h1>Custom Warhammer Card Creator WIP</h1>
         <div className="card-creator">
           <div className="input-section">
             <input

@@ -313,6 +313,6 @@ body {
   position: absolute;
   background: none; 
   width: 100px;
-  height: 120px;
-  transform: translate(50%, 50%);
+  height: 110px;
+  transform: translate(20%, 50%);
 }
