@@ -141,10 +141,11 @@ describe('App Component', () => {
     expect(newRect.left).toBe(initialRect.left);
   });
 
-  test('should render the PDF generation button', () => {
+  test('should render the PDF generation button at the top of the input section', () => {
     const { getByText } = render(<App />);
     const pdfButton = getByText('Print to PDF');
-    expect(pdfButton).toBeInTheDocument();
+    const inputSection = pdfButton.closest('.input-section');
+    expect(inputSection.firstChild).toBe(pdfButton);
   });
 
   test('should trigger handlePrintToPDF function on button click', () => {
@@ -167,5 +168,16 @@ describe('App Component', () => {
     });
     expect(pdf.internal.pageSize.getWidth()).toBe(2.5);
     expect(pdf.internal.pageSize.getHeight()).toBe(3.5);
+  });
+
+  test('should capture the content of the .pokemon-card-wrapper including images', () => {
+    const { getByText } = render(<App />);
+    const pdfButton = getByText('Print to PDF');
+    fireEvent.click(pdfButton);
+    const cardWrapper = document.querySelector('.pokemon-card-wrapper');
+    html2canvas(cardWrapper).then(canvas => {
+      const imgData = canvas.toDataURL('image/png');
+      expect(imgData).toContain('data:image/png;base64');
+    });
   });
 });
