@@ -13,7 +13,7 @@ function App() {
     const invulnerableSaveRef = React.useRef(null); // Pb848
     const initialPosition = React.useRef({ top: 0, left: 0 }); // Pb848
     const [imageFormat, setImageFormat] = React.useState("jpeg"); // Pda30
-    const [saveValue, setSaveValue] = React.useState(0); // P18cb
+    const [saveValue, setSaveValue] = React.useState(""); // P18cb
 
     // Event handler for image upload
     const handleImageUpload = (e) => {
