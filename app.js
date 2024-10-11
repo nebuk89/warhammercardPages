@@ -197,7 +197,7 @@ function App() {
 
     return (
       <div className="container">
-        <h1>Custom Warhammer Card Creator WIP</h1>
+        <h1>Custom Warhammer Card Creator WIP 2</h1>
         <div className="card-creator">
           <div className="input-section">
             <button onClick={handlePrintToPDF}>Print to PDF</button>
