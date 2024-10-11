@@ -39,7 +39,7 @@ function App() {
         newAttacks[index] = { ...newAttacks[index], [field]: field === 'name' || field === 'otherAttackAttributes' ? value : parseInt(value) };
         return newAttacks;
       });
-      if (field === 'name') {
+      if (field === 'name' || field === 'otherAttackAttributes') {
         resizeAttackTextToFit();
       }
     };
@@ -90,13 +90,13 @@ function App() {
 
         const otherAttackAttributes = attackInfo.querySelector('.other-attack-attributes');
         let otherAttackAttributesFontSize = parseInt(window.getComputedStyle(otherAttackAttributes).fontSize);
-        if (otherAttackAttributes.scrollWidth > maxWidthAttack / 2) {
-          while (otherAttackAttributes.scrollWidth > maxWidthAttack / 2 && otherAttackAttributesFontSize > 0) {
+        if (otherAttackAttributes.scrollWidth > maxWidthAttack / 2 || otherAttackAttributes.scrollHeight > maxHeightAttack) {
+          while ((otherAttackAttributes.scrollWidth > maxWidthAttack / 2 || otherAttackAttributes.scrollHeight > maxHeightAttack) && otherAttackAttributesFontSize > 0) {
             otherAttackAttributesFontSize--;
             otherAttackAttributes.style.fontSize = otherAttackAttributesFontSize + 'px';
           }
         } else {
-          while (otherAttackAttributes.scrollWidth < otherAttackAttributes.clientWidth && otherAttackAttributesFontSize < maxWidthAttack / 2) {
+          while (otherAttackAttributes.scrollWidth < otherAttackAttributes.clientWidth && otherAttackAttributes.scrollHeight < maxHeightAttack && otherAttackAttributesFontSize < maxWidthAttack / 2) {
             otherAttackAttributesFontSize++;
             otherAttackAttributes.style.fontSize = otherAttackAttributesFontSize + 'px';
           }

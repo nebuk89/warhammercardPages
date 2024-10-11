@@ -60,7 +60,7 @@ describe('App Component', () => {
     const { getByText, getAllByPlaceholderText } = render(<App />);
     const addButton = getByText('Add Attack');
     fireEvent.click(addButton);
-    const otherAttackAttributesInput = getAllByPlaceholderText('Other Attack Attributes')[0];
+    const otherAttackAttributesInput = getAllByPlaceholderText('Other stats')[0];
     fireEvent.change(otherAttackAttributesInput, { target: { value: 'Test Other Attack Attributes' } });
     expect(otherAttackAttributesInput.value).toBe('Test Other Attack Attributes');
   });
@@ -69,8 +69,18 @@ describe('App Component', () => {
     const { getByText, getAllByPlaceholderText } = render(<App />);
     const addButton = getByText('Add Attack');
     fireEvent.click(addButton);
-    const otherAttackAttributesInput = getAllByPlaceholderText('Other Attack Attributes')[0];
+    const otherAttackAttributesInput = getAllByPlaceholderText('Other stats')[0];
     fireEvent.change(otherAttackAttributesInput, { target: { value: 'Test Other Attack Attributes' } });
     expect(otherAttackAttributesInput.value).toBe('Test Other Attack Attributes');
+  });
+
+  test('should resize other-attack-attributes text on change', () => {
+    const { getByText, getAllByPlaceholderText } = render(<App />);
+    const addButton = getByText('Add Attack');
+    fireEvent.click(addButton);
+    const otherAttackAttributesInput = getAllByPlaceholderText('Other stats')[0];
+    fireEvent.change(otherAttackAttributesInput, { target: { value: 'Test Other Attack Attributes' } });
+    const otherAttackAttributesElement = document.querySelector('.other-attack-attributes');
+    expect(otherAttackAttributesElement.style.fontSize).not.toBe('');
   });
 });
