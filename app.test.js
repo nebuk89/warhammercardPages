@@ -319,4 +319,14 @@ describe('App Component', () => {
     const invulnerableSave = getByText('3+');
     expect(invulnerableSave).toBeInTheDocument();
   });
+
+  test('should handle saveValue as a string and avoid type mismatch issues', () => {
+    const { getByLabelText, getByText } = render(<App />);
+    const tickBox = getByLabelText('Invulnerable Save');
+    fireEvent.click(tickBox);
+    const numberSelector = getByText('Save Value:');
+    fireEvent.change(numberSelector, { target: { value: '4' } });
+    const invulnerableSave = getByText('4+');
+    expect(invulnerableSave).toBeInTheDocument();
+  });
 });
