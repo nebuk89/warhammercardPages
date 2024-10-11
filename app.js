@@ -12,7 +12,7 @@ function App() {
     const [showImage, setShowImage] = React.useState(false); // Pc4d9
     const invulnerableSaveRef = React.useRef(null); // Pb848
     const initialPosition = React.useRef({ top: 0, left: 0 }); // Pb848
-    const [imageFormat, setImageFormat] = React.useState("png"); // Pda30
+    const [imageFormat, setImageFormat] = React.useState("jpeg"); // Pda30
 
     // Event handler for image upload
     const handleImageUpload = (e) => {
@@ -195,7 +195,7 @@ function App() {
       setTimeout(() => {
         html2canvas(cardWrapper, {
           backgroundColor: null,
-          scale: 2,
+          scale: 3,
           useCORS: true,
           allowTaint: true,
           foreignObjectRendering: true,
@@ -210,10 +210,10 @@ function App() {
             }
           }
         }).then(canvas => {
-          const imgData = canvas.toDataURL(`image/${imageFormat}`);
+          const imgData = canvas.toDataURL(`image/jpeg`);
           const link = document.createElement('a');
           link.href = imgData;
-          link.download = `card.${imageFormat}`;
+          link.download = `card.jpeg`;
           link.click();
         }).catch(error => {
           console.error('Error in html2canvas', error);

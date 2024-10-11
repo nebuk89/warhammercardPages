@@ -162,13 +162,13 @@ describe('App Component', () => {
     fireEvent.click(imageButton);
     // Assuming handleExportToImage function generates an image with specific dimensions
     const cardWrapper = document.querySelector('.pokemon-card-wrapper');
-    html2canvas(cardWrapper, { backgroundColor: null, scale: 2, useCORS: true, allowTaint: true }).then(canvas => {
-      const imgData = canvas.toDataURL('image/png');
+    html2canvas(cardWrapper, { backgroundColor: null, scale: 3, useCORS: true, allowTaint: true }).then(canvas => {
+      const imgData = canvas.toDataURL('image/jpeg');
       const img = new Image();
       img.src = imgData;
       img.onload = () => {
-        expect(img.width).toBe(cardWrapper.offsetWidth * 2);
-        expect(img.height).toBe(cardWrapper.offsetHeight * 2);
+        expect(img.width).toBe(cardWrapper.offsetWidth * 3);
+        expect(img.height).toBe(cardWrapper.offsetHeight * 3);
       };
     });
   });
@@ -178,9 +178,9 @@ describe('App Component', () => {
     const imageButton = getByText('Export to Image');
     fireEvent.click(imageButton);
     const cardWrapper = document.querySelector('.pokemon-card-wrapper');
-    html2canvas(cardWrapper, { backgroundColor: null, scale: 2, useCORS: true, allowTaint: true }).then(canvas => {
-      const imgData = canvas.toDataURL('image/png');
-      expect(imgData).toContain('data:image/png;base64');
+    html2canvas(cardWrapper, { backgroundColor: null, scale: 3, useCORS: true, allowTaint: true }).then(canvas => {
+      const imgData = canvas.toDataURL('image/jpeg');
+      expect(imgData).toContain('data:image/jpeg;base64');
     });
   });
 
@@ -189,12 +189,12 @@ describe('App Component', () => {
     const imageButton = getByText('Export to Image');
     fireEvent.click(imageButton);
     const cardWrapper = document.querySelector('.pokemon-card-wrapper');
-    html2canvas(cardWrapper, { backgroundColor: null, scale: 2, useCORS: true, allowTaint: true, foreignObjectRendering: true }).then(canvas => {
-      const imgData = canvas.toDataURL('image/png');
+    html2canvas(cardWrapper, { backgroundColor: null, scale: 3, useCORS: true, allowTaint: true, foreignObjectRendering: true }).then(canvas => {
+      const imgData = canvas.toDataURL('image/jpeg');
       const img = new Image();
       img.src = imgData;
       img.onload = () => {
-        expect(img.src).toContain('data:image/png;base64');
+        expect(img.src).toContain('data:image/jpeg;base64');
       };
     });
   });
@@ -204,12 +204,12 @@ describe('App Component', () => {
     const imageButton = getByText('Export to Image');
     fireEvent.click(imageButton);
     const cardWrapper = document.querySelector('.pokemon-card-wrapper');
-    html2canvas(cardWrapper, { backgroundColor: null, scale: 2, useCORS: true, allowTaint: true, foreignObjectRendering: true }).then(canvas => {
-      const imgData = canvas.toDataURL('image/png');
+    html2canvas(cardWrapper, { backgroundColor: null, scale: 3, useCORS: true, allowTaint: true, foreignObjectRendering: true }).then(canvas => {
+      const imgData = canvas.toDataURL('image/jpeg');
       const img = new Image();
       img.src = imgData;
       img.onload = () => {
-        expect(img.src).toContain('data:image/png;base64');
+        expect(img.src).toContain('data:image/jpeg;base64');
         const factionTextElement = document.querySelector('.faction-text');
         const computedStyle = window.getComputedStyle(factionTextElement);
         expect(computedStyle.borderImageSource).toContain('linear-gradient');
@@ -239,7 +239,7 @@ describe('App Component', () => {
     const imageButton = getByText('Export to Image');
     fireEvent.click(imageButton);
     const cardWrapper = document.querySelector('.pokemon-card-wrapper');
-    html2canvas(cardWrapper, { backgroundColor: null, scale: 2, useCORS: true, allowTaint: true }).then(canvas => {
+    html2canvas(cardWrapper, { backgroundColor: null, scale: 3, useCORS: true, allowTaint: true }).then(canvas => {
       const imgData = canvas.toDataURL('image/jpeg');
       expect(imgData).toContain('data:image/jpeg;base64');
     });
