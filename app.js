@@ -200,6 +200,7 @@ function App() {
         <h1>Custom Warhammer Card Creator WIP</h1>
         <div className="card-creator">
           <div className="input-section">
+            <button onClick={handlePrintToPDF}>Print to PDF</button>
             <input
               type="text"
               placeholder="Unit Name"
@@ -274,7 +275,6 @@ function App() {
                 Invulnerable Save
               </label>
             </div>
-            <button onClick={handlePrintToPDF}>Print to PDF</button>
           </div>
           <div className="card-preview">
             <div className="pokemon-card-wrapper">
