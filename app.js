@@ -71,17 +71,18 @@ function App() {
     const resizeAttackTextToFit = () => {
       const attackInfoElements = document.querySelectorAll('.attack-info');
       const maxWidthAttack = 110;
+      const maxHeightAttack = 3 * parseFloat(getComputedStyle(document.documentElement).fontSize); // 3em
 
       attackInfoElements.forEach((attackInfo) => {
         const attackName = attackInfo.querySelector('.attack-name');
         let attackFontSize = parseInt(window.getComputedStyle(attackName).fontSize);
-        if (attackName.scrollWidth > maxWidthAttack) {
-          while (attackName.scrollWidth > maxWidthAttack && attackFontSize > 0) {
+        if (attackName.scrollWidth > maxWidthAttack || attackName.scrollHeight > maxHeightAttack) {
+          while ((attackName.scrollWidth > maxWidthAttack || attackName.scrollHeight > maxHeightAttack) && attackFontSize > 0) {
             attackFontSize--;
             attackName.style.fontSize = attackFontSize + 'px';
           }
         } else {
-          while (attackName.scrollWidth < attackName.clientWidth && attackFontSize < maxWidthAttack) {
+          while (attackName.scrollWidth < attackName.clientWidth && attackName.scrollHeight < maxHeightAttack && attackFontSize < maxWidthAttack) {
             attackFontSize++;
             attackName.style.fontSize = attackFontSize + 'px';
           }
@@ -152,6 +153,11 @@ function App() {
         window.removeEventListener('resize', resizeFactionText);
       };
     }, [factionText]);
+
+    // Effect to resize attack text when attacks state changes
+    React.useEffect(() => {
+      resizeAttackTextToFit();
+    }, [attacks]);
 
     return (
       <div className="container">
