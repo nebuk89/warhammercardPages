@@ -2,7 +2,7 @@ console.log('app.js loaded');
 
 function App() {
     const [name, setName] = React.useState("");
-    const [image, setImage] = React.useState("https://github.com/nebuk89/FFmpeg-Builds/blob/master/Picture.png?raw=true"); // Set initial state to placeholder image
+    const [image, setImage] = React.useState("local-image-url.png"); // Set initial state to local image URL
     const [attributes, setAttributes] = React.useState({
       M: 0, T: 0, SV: 0, W: 0, LD: 0, OC: 0,
     });
@@ -183,7 +183,7 @@ function App() {
     // Function to handle printing to PDF
     const handlePrintToPDF = () => {
       const cardWrapper = document.querySelector('.pokemon-card-wrapper');
-      html2canvas(cardWrapper, { backgroundColor: null, scale: 2, useCORS: true, allowTaint: true, foreignObjectRendering: true }).then(canvas => {
+      html2canvas(cardWrapper, { backgroundColor: null, scale: 2, useCORS: true, allowTaint: false, foreignObjectRendering: true }).then(canvas => {
         const imgData = canvas.toDataURL('image/png');
         const pdf = new jsPDF({
           orientation: 'portrait',
@@ -337,3 +337,4 @@ function App() {
   console.error('Error rendering React component:', error);
   document.getElementById('debug').innerHTML += '<br>Error rendering React component. Check console for details.';
 }
+
