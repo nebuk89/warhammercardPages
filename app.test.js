@@ -89,4 +89,16 @@ describe('App Component', () => {
     const firstAttributeValue = getByText(/0"/);
     expect(firstAttributeValue).toBeInTheDocument();
   });
+
+  test('should append special character + to the third attribute circle value', () => {
+    const { getByText } = render(<App />);
+    const thirdAttributeValue = getByText(/0\+/);
+    expect(thirdAttributeValue).toBeInTheDocument();
+  });
+
+  test('should append special character + to the fifth attribute circle value', () => {
+    const { getByText } = render(<App />);
+    const fifthAttributeValue = getByText(/0\+/);
+    expect(fifthAttributeValue).toBeInTheDocument();
+  });
 });
