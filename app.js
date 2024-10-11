@@ -183,7 +183,7 @@ function App() {
     // Function to handle printing to PDF
     const handlePrintToPDF = () => {
       const cardWrapper = document.querySelector('.pokemon-card-wrapper');
-      html2canvas(cardWrapper, { backgroundColor: null, scale: 2, useCORS: true, allowTaint: true }).then(canvas => {
+      html2canvas(cardWrapper, { backgroundColor: null, scale: 2, useCORS: true, allowTaint: true, foreignObjectRendering: true }).then(canvas => {
         const imgData = canvas.toDataURL('image/png');
         const pdf = new jsPDF({
           orientation: 'portrait',
