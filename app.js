@@ -264,7 +264,7 @@ function App() {
                 </div>
                 <div className="overlay-text">{overlayText || "Adeptus Astartes, Blood Angels"}</div>
                 {image && <img src={image} alt="Unit" className="pokemon-image" />}
-                {showImage && <img src="https://github.com/nebuk89/FFmpeg-Builds/blob/master/image%2016.png" alt="Overlay" className="pokemon-image" />} // P8660
+                {showImage && <img src="https://github.com/nebuk89/FFmpeg-Builds/blob/master/image%2016.png?raw=true" alt="Overlay" className="pokemon-image" />}
                 <div className="keywords">Infantry, Grenades, Imperium, Tacticus, Bladeguard Veteran Squad</div>
                 
                 <div className="attacks">
