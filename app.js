@@ -236,10 +236,10 @@ function App() {
                 <div className="card-header">
                   <h2>{name || "Assault Intercessors"}</h2>
                   <div className="attributes">
-                    {Object.entries(attributes).map(([attr, value]) => (
+                    {Object.entries(attributes).map(([attr, value], index) => (
                       <div key={attr} className="attribute-circle">
                         <span className="attribute-label">{attr}</span>
-                        <span className="attribute-value">{value}</span>
+                        <span className="attribute-value">{index === 0 ? `${value}"` : value}</span>
                       </div>
                     ))}
                   </div>
