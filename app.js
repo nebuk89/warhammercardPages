@@ -10,6 +10,8 @@ function App() {
     const [overlayText, setOverlayText] = React.useState(""); 
     const [factionText, setFactionText] = React.useState("■FACTION : Oath of Moment\nStart of the Fight phase, select  1   to apply to models in this unit until the end of the phase:\n■ Swords of the Imperium: Each time a model in this unit makes a melee attack, re-roll a Hit roll of 1.\n■ Shields of the Imperium: Each time an invulnerable saving throw is made for a model in this unit, re-roll a saving throw of 1");
     const [showImage, setShowImage] = React.useState(false); // Pc4d9
+    const invulnerableSaveRef = React.useRef(null); // Pb848
+    const initialPosition = React.useRef({ top: 0, left: 0 }); // Pb848
 
     // Event handler for image upload
     const handleImageUpload = (e) => {
@@ -48,6 +50,10 @@ function App() {
     // Event handler for toggling the showImage state // P6bd1
     const handleShowImageToggle = () => {
       setShowImage(prev => !prev);
+      if (!showImage && invulnerableSaveRef.current) {
+        const rect = invulnerableSaveRef.current.getBoundingClientRect();
+        initialPosition.current = { top: rect.top, left: rect.left };
+      }
     };
 
     // Function to resize text to fit within the maxWidth
@@ -166,6 +172,14 @@ function App() {
       resizeAttackTextToFit();
     }, [attacks]);
 
+    // Effect to set the position of the invulnerable-save image based on the stored initial position
+    React.useEffect(() => {
+      if (invulnerableSaveRef.current) {
+        invulnerableSaveRef.current.style.top = `${initialPosition.current.top}px`;
+        invulnerableSaveRef.current.style.left = `${initialPosition.current.left}px`;
+      }
+    }, [attacks]);
+
     return (
       <div className="container">
         <h1>Custom Warhammer Card Creator 1</h1>
@@ -264,7 +278,7 @@ function App() {
                 </div>
                 <div className="overlay-text">{overlayText || "Adeptus Astartes, Blood Angels"}</div>
                 {image && <img src={image} alt="Unit" className="pokemon-image" />}
-                {showImage && <img src="https://github.com/nebuk89/FFmpeg-Builds/blob/master/image%2016.png?raw=true" alt="Overlay" className="invulnerable-save" />}
+                {showImage && <img src="https://github.com/nebuk89/FFmpeg-Builds/blob/master/image%2016.png?raw=true" alt="Overlay" className="invulnerable-save" ref={invulnerableSaveRef} style={{ top: initialPosition.current.top, left: initialPosition.current.left }} />}
                 <div className="keywords">Infantry, Grenades, Imperium, Tacticus, Bladeguard Veteran Squad</div>
                 
                 <div className="attacks">

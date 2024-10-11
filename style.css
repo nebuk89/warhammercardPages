@@ -314,7 +314,5 @@ body {
   background: none; 
   width: 100px;
   height: 120px;
-  top: 40%;
-  left: 65%;
   transform: translate(50%, 50%);
 }
