@@ -203,7 +203,7 @@ function App() {
                     </div>
                   ))}
                   <div className="attack-stat">
-                    <label>New Field</label>
+                    <label>Other stats</label>
                     <input
                       type="text"
                       value={attack.newField}
