@@ -217,8 +217,15 @@ body {
   width: 100px;
   overflow: hidden;
   text-overflow: ellipsis;
-  white-space: nowrap;
+  white-space: normal;
   margin-right: 10px;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  max-height: 3em;
+  line-height: 1.5;
+  word-wrap: break-word;
 }
 
 .attack-labels .stat-label,
@@ -292,6 +299,7 @@ body {
   max-height: 3em; /* Adjust based on your line-height */
   line-height: 1.5; /* Ensure this matches your desired line height */
   word-wrap: break-word; /* Ensure text wrapping */
+  white-space: normal;
 }
 
 @media (max-width: 768px) {
