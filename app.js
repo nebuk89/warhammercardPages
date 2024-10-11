@@ -10,6 +10,7 @@ function App() {
     const [overlayText, setOverlayText] = React.useState(""); 
     const [factionText, setFactionText] = React.useState("■FACTION : Oath of Moment\nStart of the Fight phase, select  1   to apply to models in this unit until the end of the phase:\n■ Swords of the Imperium: Each time a model in this unit makes a melee attack, re-roll a Hit roll of 1.\n■ Shields of the Imperium: Each time an invulnerable saving throw is made for a model in this unit, re-roll a saving throw of 1");
 
+    // Event handler for image upload
     const handleImageUpload = (e) => {
       const file = e.target.files[0];
       const reader = new FileReader();
@@ -21,14 +22,17 @@ function App() {
       }
     };
   
+    // Event handler for attribute change
     const handleAttributeChange = (attr, value) => {
       setAttributes(prev => ({ ...prev, [attr]: value }));
     };
   
+    // Event handler for adding an attack
     const addAttack = () => {
       setAttacks(prev => [...prev, { name: "", A: 0, BS: 0, S: 0, AP: 0, D: 0 }]);
     };
   
+    // Event handler for updating an attack
     const updateAttack = (index, field, value) => {
       setAttacks(prev => {
         const newAttacks = [...prev];
@@ -40,113 +44,103 @@ function App() {
       }
     };
 
-    React.useEffect(() => {
-      setFactionText("■FACTION : Oath of Moment\nStart of the Fight phase, select  1   to apply to models in this unit until the end of the phase:\n■ Swords of the Imperium: Each time a model in this unit makes a melee attack, re-roll a Hit roll of 1.\n■ Shields of the Imperium: Each time an invulnerable saving throw is made for a model in this unit, re-roll a saving throw of 1");
-    }, [overlayText]);
-   
-    React.useEffect(() => {
+    // Function to resize text to fit within the maxWidth
+    const resizeTextToFit = () => {
       const pokemonCardTitle = document.querySelector('.pokemon-card h2');
       const attackInfoElements = document.querySelectorAll('.attack-info');
-      const factionTextElement = document.querySelector('.faction-text');
       const maxWidth = 240;
       const maxWidthAttack = 110;
 
-      function resizeTextToFit() {
-      
-      // Resize the title text to fit within the maxWidth
       let fontSize = parseInt(window.getComputedStyle(pokemonCardTitle).fontSize);
       if (pokemonCardTitle.scrollWidth > maxWidth) {
         while (pokemonCardTitle.scrollWidth > maxWidth && fontSize > 0) {
-        fontSize--;
-        pokemonCardTitle.style.fontSize = fontSize + 'px';
+          fontSize--;
+          pokemonCardTitle.style.fontSize = fontSize + 'px';
         }
       } else {
         while (pokemonCardTitle.scrollWidth < pokemonCardTitle.clientWidth && fontSize < maxWidth) {
-        fontSize++;
-        pokemonCardTitle.style.fontSize = fontSize + 'px';
+          fontSize++;
+          pokemonCardTitle.style.fontSize = fontSize + 'px';
         }
       }
       pokemonCardTitle.style.whiteSpace = 'nowrap'; // Add this line to prevent text wrapping
-  
+
       resizeAttackTextToFit();
-      }
+    };
 
-      function resizeAttackTextToFit() {
-        attackInfoElements.forEach((attackInfo) => {
-          const attackName = attackInfo.querySelector('.attack-name');
-          let attackFontSize = parseInt(window.getComputedStyle(attackName).fontSize);
-          if (attackName.scrollWidth > maxWidthAttack) {
-            while (attackName.scrollWidth > maxWidthAttack && attackFontSize > 0) {
-              attackFontSize--;
-              attackName.style.fontSize = attackFontSize + 'px';
-            }
-          } else {
-            while (attackName.scrollWidth < attackName.clientWidth && attackFontSize < maxWidthAttack) {
-              attackFontSize++;
-              attackName.style.fontSize = attackFontSize + 'px';
-            }
+    // Function to resize attack text to fit within the maxWidthAttack
+    const resizeAttackTextToFit = () => {
+      const attackInfoElements = document.querySelectorAll('.attack-info');
+      const maxWidthAttack = 110;
+
+      attackInfoElements.forEach((attackInfo) => {
+        const attackName = attackInfo.querySelector('.attack-name');
+        let attackFontSize = parseInt(window.getComputedStyle(attackName).fontSize);
+        if (attackName.scrollWidth > maxWidthAttack) {
+          while (attackName.scrollWidth > maxWidthAttack && attackFontSize > 0) {
+            attackFontSize--;
+            attackName.style.fontSize = attackFontSize + 'px';
           }
-          attackName.style.whiteSpace = 'nowrap'; // Add this line to prevent text wrapping
-        });
+        } else {
+          while (attackName.scrollWidth < attackName.clientWidth && attackFontSize < maxWidthAttack) {
+            attackFontSize++;
+            attackName.style.fontSize = attackFontSize + 'px';
+          }
+        }
+        attackName.style.whiteSpace = 'nowrap'; // Add this line to prevent text wrapping
+      });
+    };
+
+    // Function to resize faction text to fit within the container
+    const resizeFactionText = () => {
+      const factionTextElement = document.querySelector('.faction-text');
+      const fontSize = parseInt(window.getComputedStyle(factionTextElement).fontSize);
+      let newFontSize = fontSize;
+
+      factionTextElement.style.fontSize = '16px';
+
+      while (factionTextElement.scrollWidth > factionTextElement.offsetWidth ||
+             factionTextElement.scrollHeight > factionTextElement.offsetHeight) {
+        newFontSize--;
+        factionTextElement.style.fontSize = `${newFontSize}px`;
       }
 
-const inputBox = document.getElementById('faction-text-input');
-const factionText = document.querySelector('.faction-text');
-
-inputBox.addEventListener('input', updateAndResizeText);
-
-function updateAndResizeText() {
-    factionText.textContent = inputBox.value;
-    resizeText();
-}
-
-function resizeText() {
-    const fontSize = parseInt(window.getComputedStyle(factionText).fontSize);
-    let newFontSize = fontSize;
-    
-    // Reset font size to ensure accurate measurements
-    factionText.style.fontSize = '16px';
-    
-    while (factionText.scrollWidth > factionText.offsetWidth ||
-           factionText.scrollHeight > factionText.offsetHeight) {
-        newFontSize--;
-        factionText.style.fontSize = `${newFontSize}px`;
-    }
-    
-    while (factionText.scrollWidth < factionText.offsetWidth &&
-           factionText.scrollHeight < factionText.offsetHeight &&
-           newFontSize < fontSize) {
+      while (factionTextElement.scrollWidth < factionTextElement.offsetWidth &&
+             factionTextElement.scrollHeight < factionTextElement.offsetHeight &&
+             newFontSize < fontSize) {
         newFontSize++;
-        factionText.style.fontSize = `${newFontSize}px`;
-        if (factionText.scrollWidth > factionText.offsetWidth ||
-            factionText.scrollHeight > factionText.offsetHeight) {
-            newFontSize--;
-            factionText.style.fontSize = `${newFontSize}px`;
-            break;
+        factionTextElement.style.fontSize = `${newFontSize}px`;
+        if (factionTextElement.scrollWidth > factionTextElement.offsetWidth ||
+            factionTextElement.scrollHeight > factionTextElement.offsetHeight) {
+          newFontSize--;
+          factionTextElement.style.fontSize = `${newFontSize}px`;
+          break;
         }
-    }
-}
+      }
+    };
 
-// Initial resize
-resizeText();
-
-// Resize on window resize
-window.addEventListener('resize', resizeText);
-
+    // Effect to resize text on window resize
+    React.useEffect(() => {
       resizeTextToFit();
       window.addEventListener('resize', resizeTextToFit);
       window.addEventListener('input', resizeTextToFit);
 
       return () => {
-      window.removeEventListener('resize', resizeTextToFit);
-      window.removeEventListener('input', resizeTextToFit);
+        window.removeEventListener('resize', resizeTextToFit);
+        window.removeEventListener('input', resizeTextToFit);
       };
-    }, [name, factionText]); // Add 'name' and 'factionText' as dependencies to the useEffect hook
+    }, [name, factionText]);
 
+    // Effect to resize faction text on window resize
+    React.useEffect(() => {
+      resizeFactionText();
+      window.addEventListener('resize', resizeFactionText);
 
+      return () => {
+        window.removeEventListener('resize', resizeFactionText);
+      };
+    }, [factionText]);
 
-
-  
     return (
       <div className="container">
         <h1>Custom Warhammer Card Creator 1</h1>
@@ -158,11 +152,11 @@ window.addEventListener('resize', resizeText);
               value={name}
               onChange={(e) => setName(e.target.value)}
             />
-             <input // P76ad
+            <input
               type="text"
               placeholder="Keywords"
               value={overlayText}
-              onChange={(e) => setOverlayText(e.target.value)} // P5b03
+              onChange={(e) => setOverlayText(e.target.value)}
             />
             <input type="file" accept="image/*" onChange={handleImageUpload} />
             <h3>Attributes</h3>
