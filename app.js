@@ -183,7 +183,7 @@ function App() {
     // Function to handle exporting to PNG
     const handleExportToPNG = () => {
       const cardWrapper = document.querySelector('.pokemon-card-wrapper');
-      html2canvas(cardWrapper, { backgroundColor: null, scale: 2, useCORS: true, allowTaint: false, foreignObjectRendering: true, proxy: 'https://cors-anywhere.herokuapp.com/' }).then(canvas => {
+      html2canvas(cardWrapper, { backgroundColor: null, scale: 2, useCORS: true, allowTaint: true, foreignObjectRendering: true }).then(canvas => {
         const imgData = canvas.toDataURL('image/png');
         const link = document.createElement('a');
         link.href = imgData;
