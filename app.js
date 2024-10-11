@@ -29,7 +29,7 @@ function App() {
   
     // Event handler for adding an attack
     const addAttack = () => {
-      setAttacks(prev => [...prev, { name: "", A: 0, BS: 0, S: 0, AP: 0, D: 0, newField: "" }]);
+      setAttacks(prev => [...prev, { name: "", A: 0, BS: 0, S: 0, AP: 0, D: 0, OtherStats: "" }]);
     };
   
     // Event handler for updating an attack
@@ -252,6 +252,7 @@ function App() {
                     <span className="stat-label">S</span>
                     <span className="stat-label">AP</span>
                     <span className="stat-label">D</span>
+                    <span className="stat-label"> </span>
                   </div>
                   {attacks.map((attack, index) => (
                     <div key={index} className="attack-info">

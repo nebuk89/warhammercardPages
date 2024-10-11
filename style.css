@@ -200,52 +200,43 @@ body {
   padding: 10px;
 }
 
-.attack-labels {
-  display: flex;
-  justify-content: space-between;
-  font-weight: bold;
-  margin-bottom: 5px;
-  flex: 1;
-  text-align: center;
-}
-
-.attack-labels span {
-  flex: 1;
-  text-align: center;
-}
-
-.attack-labels .stat-label {
-  flex: 0 0 40px;
-}
-
-.attack-info {
+.attack-labels, .attack-info {
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
+}
+
+.attack-labels {
+  font-weight: bold;
+  padding-left: 110px; /* Adjust this to match the width of .attack-name */
+}
+
+.attack-name {
+  font-weight: bold;
+  width: 100px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin-right: 10px;
+}
+
+.attack-labels .stat-label,
+.attack-values .stat-value {
+  flex: 1;
+  text-align: center;
+  min-width: 40px; /* Ensure a minimum width for each stat */
+}
+
+.attack-info {
   padding: 5px;
   background-color: rgba(240, 240, 240, 0.8);
   border-radius: 4px;
 }
 
-.attack-name {
-  font-weight: bold;
-  padding-right: 10px;
-  white-space: nowrap;
-  width: 14px;
-  overflow: hidden;
-  flex: 0 0 100px;
-  text-overflow: clip;
-}
 .attack-values {
   display: flex;
-  justify-content: flex-start;
   flex: 1;
-}
-
-.attack-values .stat-value {
-  flex: 1;
-  text-align: center;
 }
 
 .attack-input {
