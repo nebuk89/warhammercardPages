@@ -288,6 +288,12 @@ body {
   white-space: pre-line;
 }
 
+.new-field {
+  flex: 0 0 50px;
+  font-size: 15px;
+  text-align: center;
+}
+
 @media (max-width: 768px) {
   .card-creator {
     flex-direction: column;

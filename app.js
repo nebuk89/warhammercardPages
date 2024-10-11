@@ -29,14 +29,14 @@ function App() {
   
     // Event handler for adding an attack
     const addAttack = () => {
-      setAttacks(prev => [...prev, { name: "", A: 0, BS: 0, S: 0, AP: 0, D: 0 }]);
+      setAttacks(prev => [...prev, { name: "", A: 0, BS: 0, S: 0, AP: 0, D: 0, newField: "" }]);
     };
   
     // Event handler for updating an attack
     const updateAttack = (index, field, value) => {
       setAttacks(prev => {
         const newAttacks = [...prev];
-        newAttacks[index] = { ...newAttacks[index], [field]: field === 'name' ? value : parseInt(value) };
+        newAttacks[index] = { ...newAttacks[index], [field]: field === 'name' || field === 'newField' ? value : parseInt(value) };
         return newAttacks;
       });
       if (field === 'name') {
@@ -88,6 +88,21 @@ function App() {
           }
         }
         attackName.style.whiteSpace = 'nowrap'; // Add this line to prevent text wrapping
+
+        const newField = attackInfo.querySelector('.new-field');
+        let newFieldFontSize = parseInt(window.getComputedStyle(newField).fontSize);
+        if (newField.scrollWidth > maxWidthAttack / 2) {
+          while (newField.scrollWidth > maxWidthAttack / 2 && newFieldFontSize > 0) {
+            newFieldFontSize--;
+            newField.style.fontSize = newFieldFontSize + 'px';
+          }
+        } else {
+          while (newField.scrollWidth < newField.clientWidth && newFieldFontSize < maxWidthAttack / 2) {
+            newFieldFontSize++;
+            newField.style.fontSize = newFieldFontSize + 'px';
+          }
+        }
+        newField.style.whiteSpace = 'nowrap'; // Add this line to prevent text wrapping
       });
     };
 
@@ -190,6 +205,14 @@ function App() {
                       />
                     </div>
                   ))}
+                  <div className="attack-stat">
+                    <label>New Field</label>
+                    <input
+                      type="text"
+                      value={attack.newField}
+                      onChange={(e) => updateAttack(index, "newField", e.target.value)}
+                    />
+                  </div>
                 </div>
               </div>
             ))}
@@ -239,6 +262,7 @@ function App() {
                         <span className="stat-value">{attack.S}</span>
                         <span className="stat-value">{attack.AP}</span>
                         <span className="stat-value">{attack.D}</span>
+                        <span className="new-field">{attack.newField}</span>
                       </div>
                     </div>
                   ))}

@@ -55,4 +55,22 @@ describe('App Component', () => {
     fireEvent.change(factionTextInput, { target: { value: 'Test Faction Text' } });
     expect(factionTextInput.value).toBe('Test Faction Text');
   });
+
+  test('should render new text entry correctly', () => {
+    const { getByText, getAllByPlaceholderText } = render(<App />);
+    const addButton = getByText('Add Attack');
+    fireEvent.click(addButton);
+    const newFieldInput = getAllByPlaceholderText('New Field')[0];
+    fireEvent.change(newFieldInput, { target: { value: 'Test New Field' } });
+    expect(newFieldInput.value).toBe('Test New Field');
+  });
+
+  test('should update new text entry state correctly', () => {
+    const { getByText, getAllByPlaceholderText } = render(<App />);
+    const addButton = getByText('Add Attack');
+    fireEvent.click(addButton);
+    const newFieldInput = getAllByPlaceholderText('New Field')[0];
+    fireEvent.change(newFieldInput, { target: { value: 'Test New Field' } });
+    expect(newFieldInput.value).toBe('Test New Field');
+  });
 });
