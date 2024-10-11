@@ -194,7 +194,7 @@ function App() {
       // Add a small delay to ensure content is rendered
       setTimeout(() => {
         html2canvas(cardWrapper, {
-          backgroundColor: null,
+          backgroundColor: '#fff',
           scale: 3,
           useCORS: true,
           allowTaint: true,
@@ -210,10 +210,10 @@ function App() {
             }
           }
         }).then(canvas => {
-          const imgData = canvas.toDataURL(`image/jpeg`);
+          const imgData = canvas.toDataURL(`image/${imageFormat}`);
           const link = document.createElement('a');
           link.href = imgData;
-          link.download = `card.jpeg`;
+          link.download = `card.${imageFormat}`;
           link.click();
         }).catch(error => {
           console.error('Error in html2canvas', error);
