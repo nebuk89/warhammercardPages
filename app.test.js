@@ -186,7 +186,7 @@ describe('App Component', () => {
     const pdfButton = getByText('Print to PDF');
     fireEvent.click(pdfButton);
     const cardWrapper = document.querySelector('.pokemon-card-wrapper');
-    html2canvas(cardWrapper, { backgroundColor: null, scale: 2, useCORS: true, allowTaint: true }).then(canvas => {
+    html2canvas(cardWrapper, { backgroundColor: null, scale: 2, useCORS: true, allowTaint: true, foreignObjectRendering: true }).then(canvas => {
       const imgData = canvas.toDataURL('image/png');
       const pdf = new jsPDF({
         orientation: 'portrait',
@@ -196,6 +196,27 @@ describe('App Component', () => {
       pdf.addImage(imgData, 'PNG', 0, 0, 2.5, 3.5);
       const pdfData = pdf.output('datauristring');
       expect(pdfData).toContain('data:application/pdf;base64');
+    });
+  });
+
+  test('should include the linear-gradient border-image on faction-text in the generated PDF', () => {
+    const { getByText } = render(<App />);
+    const pdfButton = getByText('Print to PDF');
+    fireEvent.click(pdfButton);
+    const cardWrapper = document.querySelector('.pokemon-card-wrapper');
+    html2canvas(cardWrapper, { backgroundColor: null, scale: 2, useCORS: true, allowTaint: true, foreignObjectRendering: true }).then(canvas => {
+      const imgData = canvas.toDataURL('image/png');
+      const pdf = new jsPDF({
+        orientation: 'portrait',
+        unit: 'in',
+        format: [2.5, 3.5]
+      });
+      pdf.addImage(imgData, 'PNG', 0, 0, 2.5, 3.5);
+      const pdfData = pdf.output('datauristring');
+      expect(pdfData).toContain('data:application/pdf;base64');
+      const factionTextElement = document.querySelector('.faction-text');
+      const computedStyle = window.getComputedStyle(factionTextElement);
+      expect(computedStyle.borderImageSource).toContain('linear-gradient');
     });
   });
 });
