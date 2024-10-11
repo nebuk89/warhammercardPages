@@ -309,4 +309,14 @@ describe('App Component', () => {
     const invulnerableSave = getByText('2');
     expect(invulnerableSave).toBeInTheDocument();
   });
+
+  test('should retain the + symbol when the invulnerable save value is changed', () => {
+    const { getByLabelText, getByText } = render(<App />);
+    const tickBox = getByLabelText('Invulnerable Save');
+    fireEvent.click(tickBox);
+    const numberSelector = getByText('Save Value:');
+    fireEvent.change(numberSelector, { target: { value: '3' } });
+    const invulnerableSave = getByText('3+');
+    expect(invulnerableSave).toBeInTheDocument();
+  });
 });

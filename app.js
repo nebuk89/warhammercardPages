@@ -60,7 +60,7 @@ function App() {
 
     // Event handler for save value change // P5ae9
     const handleSaveValueChange = (e) => {
-      setSaveValue(parseInt(e.target.value));
+      setSaveValue(e.target.value + "+");
     };
 
     // Function to resize text to fit within the maxWidth
@@ -308,7 +308,7 @@ function App() {
                 <label>Save Value:</label>
                 <input
                   type="number"
-                  value={saveValue}
+                  value={saveValue.replace("+", "")}
                   onChange={handleSaveValueChange}
                 />
               </div>
@@ -334,7 +334,7 @@ function App() {
                 {image && <img src={image} alt="Unit" className="pokemon-image" />}
                 {showImage && (
                   <div className="invulnerable-save"  ref={invulnerableSaveRef} style={{ top: initialPosition.current.top, left: initialPosition.current.left }}>
-                    {saveValue}+
+                    {saveValue}
                   </div>
                 )}
                 <div className="keywords">Infantry, Grenades, Imperium, Tacticus, Bladeguard Veteran Squad</div>
