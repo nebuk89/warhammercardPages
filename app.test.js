@@ -239,9 +239,47 @@ describe('App Component', () => {
     const imageButton = getByText('Export to Image');
     fireEvent.click(imageButton);
     const cardWrapper = document.querySelector('.pokemon-card-wrapper');
-    html2canvas(cardWrapper, { backgroundColor: null, scale: 3, useCORS: true, allowTaint: true }).then(canvas => {
+    html2canvas(cardWrapper, { backgroundColor: '#fff', scale: 3, useCORS: true, allowTaint: true }).then(canvas => {
       const imgData = canvas.toDataURL('image/jpeg');
       expect(imgData).toContain('data:image/jpeg;base64');
+    });
+  });
+
+  test('should verify that the exported image is not blank or empty', () => {
+    const { getByText } = render(<App />);
+    const imageButton = getByText('Export to Image');
+    fireEvent.click(imageButton);
+    const cardWrapper = document.querySelector('.pokemon-card-wrapper');
+    html2canvas(cardWrapper, { backgroundColor: '#fff', scale: 3, useCORS: true, allowTaint: true }).then(canvas => {
+      const imgData = canvas.toDataURL('image/png');
+      const img = new Image();
+      img.src = imgData;
+      img.onload = () => {
+        const canvasContext = document.createElement('canvas').getContext('2d');
+        canvasContext.drawImage(img, 0, 0);
+        const pixelData = canvasContext.getImageData(0, 0, img.width, img.height).data;
+        const isBlank = pixelData.every((value, index) => value === 255 || (index + 1) % 4 === 0);
+        expect(isBlank).toBe(false);
+      };
+    });
+  });
+
+  test('should verify that the background color of the exported image is not transparent', () => {
+    const { getByText } = render(<App />);
+    const imageButton = getByText('Export to Image');
+    fireEvent.click(imageButton);
+    const cardWrapper = document.querySelector('.pokemon-card-wrapper');
+    html2canvas(cardWrapper, { backgroundColor: '#fff', scale: 3, useCORS: true, allowTaint: true }).then(canvas => {
+      const imgData = canvas.toDataURL('image/png');
+      const img = new Image();
+      img.src = imgData;
+      img.onload = () => {
+        const canvasContext = document.createElement('canvas').getContext('2d');
+        canvasContext.drawImage(img, 0, 0);
+        const pixelData = canvasContext.getImageData(0, 0, img.width, img.height).data;
+        const hasTransparentBackground = pixelData.some((value, index) => value === 0 && (index + 1) % 4 === 0);
+        expect(hasTransparentBackground).toBe(false);
+      };
     });
   });
 });
