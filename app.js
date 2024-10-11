@@ -63,7 +63,6 @@ function App() {
           pokemonCardTitle.style.fontSize = fontSize + 'px';
         }
       }
-      pokemonCardTitle.style.whiteSpace = 'nowrap'; // Add this line to prevent text wrapping
 
       resizeAttackTextToFit();
     };
@@ -87,7 +86,6 @@ function App() {
             attackName.style.fontSize = attackFontSize + 'px';
           }
         }
-        attackName.style.whiteSpace = 'nowrap'; // Add this line to prevent text wrapping
 
         const newField = attackInfo.querySelector('.new-field');
         let newFieldFontSize = parseInt(window.getComputedStyle(newField).fontSize);
@@ -102,7 +100,6 @@ function App() {
             newField.style.fontSize = newFieldFontSize + 'px';
           }
         }
-        newField.style.whiteSpace = 'nowrap'; // Add this line to prevent text wrapping
       });
     };
 
