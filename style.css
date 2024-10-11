@@ -300,6 +300,9 @@ body {
   line-height: 1.5; /* Ensure this matches your desired line height */
   word-wrap: break-word; /* Ensure text wrapping */
   white-space: normal;
+  max-height: none; /* Allow the text to grow beyond the initial size */
+  line-clamp: none; /* Remove the line clamp */
+  -webkit-line-clamp: none; /* Remove the webkit line clamp */
 }
 
 @media (max-width: 768px) {

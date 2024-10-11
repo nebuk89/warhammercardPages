@@ -73,4 +73,14 @@ describe('App Component', () => {
     fireEvent.change(otherAttackAttributesInput, { target: { value: 'Test Other Attack Attributes' } });
     expect(otherAttackAttributesInput.value).toBe('Test Other Attack Attributes');
   });
+
+  test('should resize other-attack-attributes text correctly', () => {
+    const { getByText, getAllByPlaceholderText } = render(<App />);
+    const addButton = getByText('Add Attack');
+    fireEvent.click(addButton);
+    const otherAttackAttributesInput = getAllByPlaceholderText('Other Attack Attributes')[0];
+    fireEvent.change(otherAttackAttributesInput, { target: { value: 'A very long text that should trigger resizing of the font size to fit within the box' } });
+    const otherAttackAttributesElement = getByText('A very long text that should trigger resizing of the font size to fit within the box');
+    expect(otherAttackAttributesElement.style.fontSize).not.toBe('');
+  });
 });
