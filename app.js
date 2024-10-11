@@ -85,42 +85,55 @@ function App() {
 
       });
        
-      
-
-      
-     
-       
-      
-        const faction_text_max_height = 6 * parseFloat(window.getComputedStyle(factionTextElement).lineHeight);
-        let factionFontSize = parseInt(window.getComputedStyle(factionTextElement).fontSize);
-        const minFontSize = 6;
-        const maxFontSize = 100; // Set a reasonable upper limit
-      
-        function reduce() {
-          if (factionTextElement.scrollHeight > faction_text_max_height && factionFontSize > minFontSize) {
-            factionFontSize--;
-            factionTextElement.style.fontSize = factionFontSize + 'px';
-            requestAnimationFrame(reduce);
-          } 
-        }
-      
-        function increase() {
-          if (factionTextElement.scrollHeight <= faction_text_max_height && factionFontSize < maxFontSize) {
-            factionFontSize++;
-            factionTextElement.style.fontSize = factionFontSize + 'px';
-            requestAnimationFrame(increase);
-          } 
-        }
-    
-      
-      
-        if (factionTextElement.scrollHeight > faction_text_max_height) {
-          requestAnimationFrame(reduce);
-        } else {
-          requestAnimationFrame(increase);
-        }
      
       }
+
+// HTML structure (for reference)
+// <textarea id="faction-text-input"></textarea>
+// <div class="faction-text"></div>
+
+const inputBox = document.getElementById('faction-text-input');
+const factionText = document.querySelector('.faction-text');
+
+inputBox.addEventListener('input', updateAndResizeText);
+
+function updateAndResizeText() {
+    factionText.textContent = inputBox.value;
+    resizeText();
+}
+
+function resizeText() {
+    const fontSize = parseInt(window.getComputedStyle(factionText).fontSize);
+    let newFontSize = fontSize;
+    
+    // Reset font size to ensure accurate measurements
+    factionText.style.fontSize = '16px';
+    
+    while (factionText.scrollWidth > factionText.offsetWidth ||
+           factionText.scrollHeight > factionText.offsetHeight) {
+        newFontSize--;
+        factionText.style.fontSize = `${newFontSize}px`;
+    }
+    
+    while (factionText.scrollWidth < factionText.offsetWidth &&
+           factionText.scrollHeight < factionText.offsetHeight &&
+           newFontSize < fontSize) {
+        newFontSize++;
+        factionText.style.fontSize = `${newFontSize}px`;
+        if (factionText.scrollWidth > factionText.offsetWidth ||
+            factionText.scrollHeight > factionText.offsetHeight) {
+            newFontSize--;
+            factionText.style.fontSize = `${newFontSize}px`;
+            break;
+        }
+    }
+}
+
+// Initial resize
+resizeText();
+
+// Resize on window resize
+window.addEventListener('resize', resizeText);
 
       resizeTextToFit();
       window.addEventListener('resize', resizeTextToFit);
@@ -131,6 +144,9 @@ function App() {
       window.removeEventListener('input', resizeTextToFit);
       };
     }, [name, factionText]); // Add 'name' and 'factionText' as dependencies to the useEffect hook
+
+
+
 
   
     return (
@@ -188,6 +204,7 @@ function App() {
             <button onClick={addAttack}>Add Attack</button>
             <h3>Faction Text</h3>
             <textarea
+              id="faction-text-input"
               value={factionText}
               onChange={(e) => setFactionText(e.target.value)}
               rows="6"
