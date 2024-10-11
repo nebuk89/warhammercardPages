@@ -71,38 +71,39 @@ function App() {
     const resizeAttackTextToFit = () => {
       const attackInfoElements = document.querySelectorAll('.attack-info');
       const maxWidthAttack = 110;
-      const maxHeightAttack = 3 * parseFloat(getComputedStyle(document.documentElement).fontSize); // 3em
+      const maxHeightAttack = 2 * parseFloat(getComputedStyle(document.documentElement).fontSize); // 2em
 
       attackInfoElements.forEach((attackInfo) => {
-        const attackName = attackInfo.querySelector('.attack-name');
-        let attackFontSize = parseInt(window.getComputedStyle(attackName).fontSize);
-        if (attackName.scrollWidth > maxWidthAttack || attackName.scrollHeight > maxHeightAttack) {
-          while ((attackName.scrollWidth > maxWidthAttack || attackName.scrollHeight > maxHeightAttack) && attackFontSize > 0) {
-            attackFontSize--;
-            attackName.style.fontSize = attackFontSize + 'px';
-          }
-        } else {
-          while (attackName.scrollWidth < attackName.clientWidth && attackName.scrollHeight < maxHeightAttack && attackFontSize < maxWidthAttack) {
-            attackFontSize++;
-            attackName.style.fontSize = attackFontSize + 'px';
-          }
+      const attackName = attackInfo.querySelector('.attack-name');
+      let attackFontSize = parseInt(window.getComputedStyle(attackName).fontSize);
+      if (attackName.scrollWidth > maxWidthAttack || attackName.scrollHeight > maxHeightAttack) {
+        while ((attackName.scrollWidth > maxWidthAttack || attackName.scrollHeight > maxHeightAttack) && attackFontSize > 0) {
+        attackFontSize--;
+        attackName.style.fontSize = attackFontSize + 'px';
         }
+      } else {
+        while (attackName.scrollWidth < attackName.clientWidth && attackName.scrollHeight < maxHeightAttack && attackFontSize < maxWidthAttack) {
+        attackFontSize++;
+        attackName.style.fontSize = attackFontSize + 'px';
+        }
+      }
 
-        const otherAttackAttributes = attackInfo.querySelector('.other-attack-attributes');
-        let otherAttackAttributesFontSize = parseInt(window.getComputedStyle(otherAttackAttributes).fontSize);
-        if (otherAttackAttributes.scrollWidth > maxWidthAttack / 2 || otherAttackAttributes.scrollHeight > maxHeightAttack) {
-          while ((otherAttackAttributes.scrollWidth > maxWidthAttack / 2 || otherAttackAttributes.scrollHeight > maxHeightAttack) && otherAttackAttributesFontSize > 0) {
-            otherAttackAttributesFontSize--;
-            otherAttackAttributes.style.fontSize = otherAttackAttributesFontSize + 'px';
-          }
-        } else {
-          while (otherAttackAttributes.scrollWidth < otherAttackAttributes.clientWidth && otherAttackAttributes.scrollHeight < maxHeightAttack && otherAttackAttributesFontSize < maxWidthAttack / 2) {
-            otherAttackAttributesFontSize++;
-            otherAttackAttributes.style.fontSize = otherAttackAttributesFontSize + 'px';
-          }
+      const otherAttackAttributes = attackInfo.querySelector('.other-attack-attributes');
+      let otherAttackAttributesFontSize = parseInt(window.getComputedStyle(otherAttackAttributes).fontSize);
+      if (otherAttackAttributes.scrollWidth > maxWidthAttack / 2 || otherAttackAttributes.scrollHeight > maxHeightAttack) {
+        while ((otherAttackAttributes.scrollWidth > maxWidthAttack / 2 || otherAttackAttributes.scrollHeight > maxHeightAttack) && otherAttackAttributesFontSize > 0) {
+        otherAttackAttributesFontSize--;
+        otherAttackAttributes.style.fontSize = otherAttackAttributesFontSize + 'px';
         }
+      } else {
+        while (otherAttackAttributes.scrollWidth < otherAttackAttributes.clientWidth && otherAttackAttributes.scrollHeight < maxHeightAttack && otherAttackAttributesFontSize < maxWidthAttack / 2) {
+        otherAttackAttributesFontSize++;
+        otherAttackAttributes.style.fontSize = otherAttackAttributesFontSize + 'px';
+        }
+      }
       });
     };
+    
 
     // Function to resize faction text to fit within the container
     const resizeFactionText = () => {

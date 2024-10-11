@@ -215,8 +215,7 @@ body {
 .attack-name {
   font-weight: bold;
   width: 100px;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  overflow: visible;
   white-space: normal;
   margin-right: 10px;
   display: -webkit-box;
@@ -290,8 +289,7 @@ body {
   flex: 0 0 50px;
   font-size: 15px;
   text-align: center;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  overflow: visible;
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2; /* Ensure this is correct */
