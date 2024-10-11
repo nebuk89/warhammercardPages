@@ -183,6 +183,7 @@ function App() {
 
     // Function to handle exporting to Image
     const handleExportToImage = () => {
+      //const cardWrapper = document.querySelector('.pokemon-card-wrapper');
       const cardWrapper = document.querySelector('.pokemon-card-wrapper');
       
       // Ensure the element exists
@@ -191,34 +192,15 @@ function App() {
         return;
       }
     
-      // Add a small delay to ensure content is rendered
+      // 100ms delay
       setTimeout(() => {
-        html2canvas(cardWrapper, {
-          backgroundColor: '#fff',
-          scale: 3,
-          useCORS: true,
-          allowTaint: true,
-          foreignObjectRendering: true,
-          logging: true, // Enable logging for debugging
-          onclone: (document) => {
-            // You can manipulate the cloned document here if needed
-            const clonedElement = document.querySelector('.pokemon-card-wrapper');
-            // Ensure the cloned element is visible
-            if (clonedElement) {
-              clonedElement.style.display = 'block';
-              clonedElement.style.visibility = 'visible';
-            }
-          }
-        }).then(canvas => {
-          const imgData = canvas.toDataURL(`image/${imageFormat}`);
-          const link = document.createElement('a');
-          link.href = imgData;
-          link.download = `card.${imageFormat}`;
+        html2canvas(cardWrapper).then((canvas) => {
+          const link = document.createElement("a");
+          link.href = canvas.toDataURL(`image/${imageFormat}`);
+          link.download = "warhammer_card.jpg";
           link.click();
-        }).catch(error => {
-          console.error('Error in html2canvas', error);
         });
-      }, 100); // 100ms delay
+      }, 100);
   
     };
 
