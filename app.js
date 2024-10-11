@@ -180,18 +180,15 @@ function App() {
       }
     }, [attacks]);
 
-    // Function to handle printing to PDF
-    const handlePrintToPDF = () => {
+    // Function to handle exporting to PNG
+    const handleExportToPNG = () => {
       const cardWrapper = document.querySelector('.pokemon-card-wrapper');
       html2canvas(cardWrapper, { backgroundColor: null, scale: 2, useCORS: true, allowTaint: false, foreignObjectRendering: true }).then(canvas => {
         const imgData = canvas.toDataURL('image/png');
-        const pdf = new jsPDF({
-          orientation: 'portrait',
-          unit: 'in',
-          format: [2.5, 3.5]
-        });
-        pdf.addImage(imgData, 'PNG', 0, 0, 2.5, 3.5);
-        pdf.save('card.pdf');
+        const link = document.createElement('a');
+        link.href = imgData;
+        link.download = 'card.png';
+        link.click();
       });
     };
 
@@ -200,7 +197,7 @@ function App() {
         <h1>Custom Warhammer Card Creator WIP 2</h1>
         <div className="card-creator">
           <div className="input-section">
-            <button onClick={handlePrintToPDF}>Print to PDF</button>
+            <button onClick={handleExportToPNG}>Export to PNG</button>
             <input
               type="text"
               placeholder="Unit Name"

@@ -141,39 +141,42 @@ describe('App Component', () => {
     expect(newRect.left).toBe(initialRect.left);
   });
 
-  test('should render the PDF generation button at the top of the input section', () => {
+  test('should render the PNG export button at the top of the input section', () => {
     const { getByText } = render(<App />);
-    const pdfButton = getByText('Print to PDF');
-    const inputSection = pdfButton.closest('.input-section');
-    expect(inputSection.firstChild).toBe(pdfButton);
+    const pngButton = getByText('Export to PNG');
+    const inputSection = pngButton.closest('.input-section');
+    expect(inputSection.firstChild).toBe(pngButton);
   });
 
-  test('should trigger handlePrintToPDF function on button click', () => {
+  test('should trigger handleExportToPNG function on button click', () => {
     const { getByText } = render(<App />);
-    const pdfButton = getByText('Print to PDF');
-    fireEvent.click(pdfButton);
-    // Assuming handlePrintToPDF function has a console.log statement
-    expect(console.log).toHaveBeenCalledWith('handlePrintToPDF function triggered');
+    const pngButton = getByText('Export to PNG');
+    fireEvent.click(pngButton);
+    // Assuming handleExportToPNG function has a console.log statement
+    expect(console.log).toHaveBeenCalledWith('handleExportToPNG function triggered');
   });
 
-  test('should generate a PDF with correct dimensions', () => {
+  test('should generate a PNG with correct dimensions', () => {
     const { getByText } = render(<App />);
-    const pdfButton = getByText('Print to PDF');
-    fireEvent.click(pdfButton);
-    // Assuming handlePrintToPDF function generates a PDF with specific dimensions
-    const pdf = new jsPDF({
-      orientation: 'portrait',
-      unit: 'in',
-      format: [2.5, 3.5]
+    const pngButton = getByText('Export to PNG');
+    fireEvent.click(pngButton);
+    // Assuming handleExportToPNG function generates a PNG with specific dimensions
+    const cardWrapper = document.querySelector('.pokemon-card-wrapper');
+    html2canvas(cardWrapper, { backgroundColor: null, scale: 2, useCORS: true, allowTaint: true }).then(canvas => {
+      const imgData = canvas.toDataURL('image/png');
+      const img = new Image();
+      img.src = imgData;
+      img.onload = () => {
+        expect(img.width).toBe(cardWrapper.offsetWidth * 2);
+        expect(img.height).toBe(cardWrapper.offsetHeight * 2);
+      };
     });
-    expect(pdf.internal.pageSize.getWidth()).toBe(2.5);
-    expect(pdf.internal.pageSize.getHeight()).toBe(3.5);
   });
 
   test('should capture the content of the .pokemon-card-wrapper including images', () => {
     const { getByText } = render(<App />);
-    const pdfButton = getByText('Print to PDF');
-    fireEvent.click(pdfButton);
+    const pngButton = getByText('Export to PNG');
+    fireEvent.click(pngButton);
     const cardWrapper = document.querySelector('.pokemon-card-wrapper');
     html2canvas(cardWrapper, { backgroundColor: null, scale: 2, useCORS: true, allowTaint: true }).then(canvas => {
       const imgData = canvas.toDataURL('image/png');
@@ -181,42 +184,36 @@ describe('App Component', () => {
     });
   });
 
-  test('should include the border-bottom image in the generated PDF', () => {
+  test('should include the border-bottom image in the generated PNG', () => {
     const { getByText } = render(<App />);
-    const pdfButton = getByText('Print to PDF');
-    fireEvent.click(pdfButton);
+    const pngButton = getByText('Export to PNG');
+    fireEvent.click(pngButton);
     const cardWrapper = document.querySelector('.pokemon-card-wrapper');
     html2canvas(cardWrapper, { backgroundColor: null, scale: 2, useCORS: true, allowTaint: true, foreignObjectRendering: true }).then(canvas => {
       const imgData = canvas.toDataURL('image/png');
-      const pdf = new jsPDF({
-        orientation: 'portrait',
-        unit: 'in',
-        format: [2.5, 3.5]
-      });
-      pdf.addImage(imgData, 'PNG', 0, 0, 2.5, 3.5);
-      const pdfData = pdf.output('datauristring');
-      expect(pdfData).toContain('data:application/pdf;base64');
+      const img = new Image();
+      img.src = imgData;
+      img.onload = () => {
+        expect(img.src).toContain('data:image/png;base64');
+      };
     });
   });
 
-  test('should include the linear-gradient border-image on faction-text in the generated PDF', () => {
+  test('should include the linear-gradient border-image on faction-text in the generated PNG', () => {
     const { getByText } = render(<App />);
-    const pdfButton = getByText('Print to PDF');
-    fireEvent.click(pdfButton);
+    const pngButton = getByText('Export to PNG');
+    fireEvent.click(pngButton);
     const cardWrapper = document.querySelector('.pokemon-card-wrapper');
     html2canvas(cardWrapper, { backgroundColor: null, scale: 2, useCORS: true, allowTaint: true, foreignObjectRendering: true }).then(canvas => {
       const imgData = canvas.toDataURL('image/png');
-      const pdf = new jsPDF({
-        orientation: 'portrait',
-        unit: 'in',
-        format: [2.5, 3.5]
-      });
-      pdf.addImage(imgData, 'PNG', 0, 0, 2.5, 3.5);
-      const pdfData = pdf.output('datauristring');
-      expect(pdfData).toContain('data:application/pdf;base64');
-      const factionTextElement = document.querySelector('.faction-text');
-      const computedStyle = window.getComputedStyle(factionTextElement);
-      expect(computedStyle.borderImageSource).toContain('linear-gradient');
+      const img = new Image();
+      img.src = imgData;
+      img.onload = () => {
+        expect(img.src).toContain('data:image/png;base64');
+        const factionTextElement = document.querySelector('.faction-text');
+        const computedStyle = window.getComputedStyle(factionTextElement);
+        expect(computedStyle.borderImageSource).toContain('linear-gradient');
+      };
     });
   });
 });
