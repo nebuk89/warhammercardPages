@@ -79,6 +79,7 @@ body {
     display: flex; /* Make the pokemon-card a flex container */
     flex-direction: column; /* Ensure children are stacked vertically */
     position: relative; /* Add this line to make the pokemon-card a positioning context */
+    background-color: white; /* Ensure the .pokemon-card element has a background color set to white */
   }
   
   .card-header {
