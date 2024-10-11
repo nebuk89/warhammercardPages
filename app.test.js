@@ -83,4 +83,10 @@ describe('App Component', () => {
     const otherAttackAttributesElement = getByText('A very long text that should trigger resizing of the font size to fit within the box');
     expect(otherAttackAttributesElement.style.fontSize).not.toBe('');
   });
+
+  test('should append special character " to the first attribute circle value', () => {
+    const { getByText } = render(<App />);
+    const firstAttributeValue = getByText(/0"/);
+    expect(firstAttributeValue).toBeInTheDocument();
+  });
 });
