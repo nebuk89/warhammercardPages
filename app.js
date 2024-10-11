@@ -13,6 +13,7 @@ function App() {
     const invulnerableSaveRef = React.useRef(null); // Pb848
     const initialPosition = React.useRef({ top: 0, left: 0 }); // Pb848
     const [imageFormat, setImageFormat] = React.useState("jpeg"); // Pda30
+    const [saveValue, setSaveValue] = React.useState(0); // P18cb
 
     // Event handler for image upload
     const handleImageUpload = (e) => {
@@ -55,6 +56,11 @@ function App() {
         const rect = invulnerableSaveRef.current.getBoundingClientRect();
         initialPosition.current = { top: rect.top, left: rect.left };
       }
+    };
+
+    // Event handler for save value change // P5ae9
+    const handleSaveValueChange = (e) => {
+      setSaveValue(parseInt(e.target.value));
     };
 
     // Function to resize text to fit within the maxWidth
@@ -290,6 +296,16 @@ function App() {
                 Invulnerable Save
               </label>
             </div>
+            {showImage && (
+              <div>
+                <label>Save Value:</label>
+                <input
+                  type="number"
+                  value={saveValue}
+                  onChange={handleSaveValueChange}
+                />
+              </div>
+            )}
           </div>
           <div className="card-preview">
             <div className="pokemon-card-wrapper">

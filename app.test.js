@@ -282,4 +282,21 @@ describe('App Component', () => {
       };
     });
   });
+
+  test('should render the number selector when the Invulnerable Save tickbox is set to true', () => {
+    const { getByLabelText, getByText } = render(<App />);
+    const tickBox = getByLabelText('Invulnerable Save');
+    fireEvent.click(tickBox);
+    const numberSelector = getByText('Save Value:');
+    expect(numberSelector).toBeInTheDocument();
+  });
+
+  test('should update the saveValue state when the number selector value changes', () => {
+    const { getByLabelText, getByText } = render(<App />);
+    const tickBox = getByLabelText('Invulnerable Save');
+    fireEvent.click(tickBox);
+    const numberSelector = getByText('Save Value:');
+    fireEvent.change(numberSelector, { target: { value: '5' } });
+    expect(numberSelector.value).toBe('5');
+  });
 });
