@@ -35,6 +35,9 @@ function App() {
         newAttacks[index] = { ...newAttacks[index], [field]: field === 'name' ? value : parseInt(value) };
         return newAttacks;
       });
+      if (field === 'name') {
+        resizeAttackTextToFit();
+      }
     };
 
     React.useEffect(() => {
@@ -65,29 +68,27 @@ function App() {
       }
       pokemonCardTitle.style.whiteSpace = 'nowrap'; // Add this line to prevent text wrapping
   
-// Resize the attacks text to fit within the maxWidth
-      attackInfoElements.forEach((attackInfo) => {
-        const attackName = attackInfo.querySelector('.attack-name');
-        let attackFontSize = parseInt(window.getComputedStyle(attackName).fontSize);
-        if (attackName.scrollWidth > maxWidthAttack) {
-        while (attackName.scrollWidth > maxWidthAttack && attackFontSize > 0) {
-          attackFontSize--;
-          attackName.style.fontSize = attackFontSize + 'px';
-        }
-        } else {
-        while (attackName.scrollWidth < attackName.clientWidth && attackFontSize < maxWidthAttack) {
-          attackFontSize++;
-          attackName.style.fontSize = attackFontSize + 'px';
-        }
-        }
-        attackName.style.whiteSpace = 'nowrap'; // Add this line to prevent text wrapping
-
-
-      });
-       
-     
+      resizeAttackTextToFit();
       }
 
+      function resizeAttackTextToFit() {
+        attackInfoElements.forEach((attackInfo) => {
+          const attackName = attackInfo.querySelector('.attack-name');
+          let attackFontSize = parseInt(window.getComputedStyle(attackName).fontSize);
+          if (attackName.scrollWidth > maxWidthAttack) {
+            while (attackName.scrollWidth > maxWidthAttack && attackFontSize > 0) {
+              attackFontSize--;
+              attackName.style.fontSize = attackFontSize + 'px';
+            }
+          } else {
+            while (attackName.scrollWidth < attackName.clientWidth && attackFontSize < maxWidthAttack) {
+              attackFontSize++;
+              attackName.style.fontSize = attackFontSize + 'px';
+            }
+          }
+          attackName.style.whiteSpace = 'nowrap'; // Add this line to prevent text wrapping
+        });
+      }
 
 const inputBox = document.getElementById('faction-text-input');
 const factionText = document.querySelector('.faction-text');
