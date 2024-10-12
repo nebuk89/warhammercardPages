@@ -15,6 +15,10 @@ function App() {
     const [imageFormat, setImageFormat] = React.useState("jpeg"); // Pda30
     const [saveValue, setSaveValue] = React.useState(""); // P18cb
 
+    const [showFeelNoPain, setShowFeelNoPain] = React.useState(false);
+    const feelNoPainRef = React.useRef(null);
+    const [feelNoPainValue, setFeelNoPainValue] = React.useState("");
+
     // Event handler for image upload
     const handleImageUpload = (e) => {
       const file = e.target.files[0];
@@ -61,6 +65,14 @@ function App() {
     // Event handler for save value change // P5ae9
     const handleSaveValueChange = (e) => {
       setSaveValue(e.target.value + "+");
+    };
+
+    const handleShowFeelNoPainToggle = () => {
+      setShowFeelNoPain(prev => !prev);
+    };
+
+    const handleFeelNoPainValueChange = (e) => {
+      setFeelNoPainValue(e.target.value + "+");
     };
 
     // Function to resize text to fit within the maxWidth
@@ -194,6 +206,13 @@ function App() {
       }
     }, [saveValue]);
 
+    // Effect to update the text content of the feel-no-pain object when feelNoPainValue changes
+    React.useEffect(() => {
+      if (feelNoPainRef.current) {
+        feelNoPainRef.current.textContent = feelNoPainValue;
+      }
+    }, [feelNoPainValue]);
+
     // Function to handle exporting to Image
     const handleExportToImage = () => {
       const cardWrapper = document.querySelector('.warhammer-card-wrapper');
@@ -312,6 +331,26 @@ function App() {
                 />
               </div>
             )}
+            <div>
+              <label>
+                <input
+                  type="checkbox"
+                  checked={showFeelNoPain}
+                  onChange={handleShowFeelNoPainToggle}
+                />
+                Feel No Pain
+              </label>
+            </div>
+            {showFeelNoPain && (
+              <div>
+                <label>Feel No Pain Value:</label>
+                <input
+                  type="number"
+                  value={feelNoPainValue.replace("+", "")}
+                  onChange={handleFeelNoPainValueChange}
+                />
+              </div>
+            )}
           </div>
           <div className="card-preview">
             <div className="warhammer-card-wrapper">
@@ -334,6 +373,11 @@ function App() {
                 {showImage && (
                   <div className="invulnerable-save"  ref={invulnerableSaveRef} style={{ top: initialPosition.current.top, left: initialPosition.current.left }}>
                     {saveValue}
+                  </div>
+                )}
+                {showFeelNoPain && (
+                  <div className="feel-no-pain" ref={feelNoPainRef}>
+                    {feelNoPainValue}
                   </div>
                 )}
                 <div className="keywords">Infantry, Grenades, Imperium, Tacticus, Bladeguard Veteran Squad</div>
