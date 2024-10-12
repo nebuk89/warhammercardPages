@@ -1,0 +1,28 @@
+{
+  "name": "warhammercardpages",
+  "version": "1.0.0",
+  "description": "Custom Warhammer Card Creator",
+  "main": "index.js",
+  "scripts": {
+    "start": "webpack serve --mode development",
+    "build": "webpack --mode production",
+    "test": "jest"
+  },
+  "dependencies": {
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "html2canvas": "^1.4.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.0.0",
+    "@babel/preset-env": "^7.0.0",
+    "@babel/preset-react": "^7.0.0",
+    "babel-loader": "^8.0.0",
+    "webpack": "^5.0.0",
+    "webpack-cli": "^4.0.0",
+    "webpack-dev-server": "^4.0.0",
+    "jest": "^27.0.0"
+  },
+  "author": "",
+  "license": "ISC"
+}
