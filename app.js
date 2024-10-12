@@ -371,6 +371,7 @@ function App() {
     );
   }
   
+  
   try {
   ReactDOM.createRoot(document.getElementById("root")).render(<App />);
   console.log('React component rendered successfully');
