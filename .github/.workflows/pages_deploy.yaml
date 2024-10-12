@@ -1,21 +1,25 @@
 name: Build and Deploy
 on:
-push:
-branches:
-- main
+  push:
+    branches:
+      - main
 
 jobs:
-build:
-runs-on: ubuntu-latest
+  build:
+    runs-on: ubuntu-latest
 
-steps:
-  - name: Checkout code
-    uses: actions/checkout@v2
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-  - name: Install dependencies
-    run: npm install
+      - name: Install dependencies
+        run: npm install
 
-  - name: Build
-    run: npm run build
+      - name: Build
+        run: npm run build
 
-  - name: Deploy to gh-pages
+      - name: Deploy to gh-pages
+        uses: actions/deploy-pages@v4
+        with:
+          branch: gh-pages
+          folder: build
