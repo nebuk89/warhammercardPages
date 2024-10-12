@@ -1,0 +1,325 @@
+#debug {
+  background-color: yellow;
+  padding: 10px;
+  margin-bottom: 20px;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  h1 {
+    text-align: center;
+    color: #333;
+  }
+  
+  .card-creator {
+    display: flex;
+    gap: 20px;
+    margin-top: 20px;
+  }
+  
+  .input-section {
+    flex: 1;
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .input-section input[type="text"],
+  .input-section input[type="number"],
+  .input-section input[type="file"] {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+  
+  .input-section button {
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+  
+  .card-preview {
+    flex: 1;
+  }
+  
+  .warhammer-card-wrapper {
+    background-color: #88303A;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    max-width: 720px; /* Pe426 */
+    max-height: 1008px; /* Pe426 */
+    overflow: hidden; 
+  }
+  
+  .warhammer-card {
+    background-image: url('resources/background.png');
+      background-size: cover;
+    background-position: center;
+    border-radius: 10px;
+    padding: 20px;
+    color: #333;
+    display: flex; /* Make the warhammer-card a flex container */
+    flex-direction: column; /* Ensure children are stacked vertically */
+    position: relative; /* Add this line to make the warhammer-card a positioning context */
+    background-color: white; /* Ensure the .warhammer-card element has a background color set to white */
+  }
+  
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* Align items vertically in the center */
+    margin-bottom: -15px;
+  }
+  
+  .warhammer-card h2 {
+    margin: 0;
+    padding: 5px 10px;
+    font-family: 'Trattatello', fantasy;
+    border-radius: 0px;
+    line-height: 55px; /* Adjust the line height to 55px */
+    font-size: 30px; /* Add this line to increase the default font size */
+    height: 55px; /
+  }
+  
+  .attributes {
+    display: flex;
+    gap: 5px;
+    align-items: center; /* Align attribute circles vertically with h2 */
+  }
+  
+  .attribute-circle {
+    width: 33px;
+    height: 33px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #381720 0%, #892E3A 52%, #B57B83 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; /* Center content inside the circle */
+    position: relative;
+  /*  gap: 10px; /* Add this line to increase vertical distance */
+  }
+
+  .attribute-circle span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    line-height: 1; /* Add this line to vertically center the text */
+  }
+
+  .attribute-label {
+    font-weight: bolder;
+    font-size: 18px;
+    color: black;
+    text-align: center;
+    font-family: 'Trattatello', fantasy;
+    position: absolute; /* Position it absolutely */
+    top: -30px; /* Adjust as needed to place it above the circle */
+    left: 50%;
+    transform: translateX(-50%); /* Center horizontally */
+  }
+  
+  .attribute-value {
+    display: flex;
+    font-family: 'Trattatello', fantasy;
+    color: white;
+    align-items: center;
+    justify-content: center;
+    height: 100%; /* Ensure it is fully in the middle */
+    position: absolute; /* Position it absolutely */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Center both vertically and horizontally */
+  }
+
+.warhammer-image {
+  padding: 10px;
+  object-fit: contain;
+  background: linear-gradient(135deg, #381720 0%, #892E3A 52%, #B57B83 100%);
+  border-radius: 8px;
+  box-sizing: content-box;
+  max-width: 80%;
+  margin: 0 auto; /* Add this line to center align the image */
+}
+
+.overlay-text {
+  position: relative;
+  top: 10px;
+  right: -292px;
+  width: 33%;
+  height: 15px;
+  background: linear-gradient(135deg, #381720 0%, #892E3A 52%, #B57B83 100%);
+  transform: skew(-20deg);
+  color: white;
+  text-align: center;
+  font-size: 12px;
+  line-height: 15px;
+  font-family: 'Trattatello', fantasy;
+  border-bottom: 2px solid; /* Required for border-image to work */
+  border-image: linear-gradient(135deg, #BFA100 0%, #E4D895 21%, #DEA722 37%, #E6CF0E 57%, #CB9705 81%, #92611A 100%);
+  border-image-slice: 1;
+}
+
+.keywords {
+  height: 20%;
+  width:70%;
+  margin: 10px auto 5px auto; /* Added 20px top margin */
+  background: linear-gradient(135deg, #381720 0%, #892E3A 52%, #B57B83 100%);
+  color: white;
+  text-align: center;
+  font-size: small;
+  line-height: 1.5;
+  font-family: 'Trattatello', fantasy;
+  transform: skew(-20deg);
+  border-bottom: 2px solid; /* Required for border-image to work */
+  border-image: linear-gradient(135deg, #BFA100 0%, #E4D895 21%, #DEA722 37%, #E6CF0E 57%, #CB9705 81%, #92611A 100%);
+  border-image-slice: 1;
+}
+
+.attacks {
+  background-color: rgba(255, 255, 255, 0.7);
+  border-radius: 8px;
+  padding: 10px;
+}
+
+.attack-labels, .attack-info {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.attack-labels {
+  font-weight: bold;
+  padding-left: 110px; /* Adjust this to match the width of .attack-name */
+}
+
+.attack-name {
+  font-weight: bold;
+  width: 100px;
+  overflow: visible;
+  white-space: normal;
+  margin-right: 10px;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  max-height: 3em;
+  line-height: 1.5;
+  word-wrap: break-word;
+}
+
+.attack-labels .stat-label,
+.attack-values .stat-value {
+  flex: 1;
+  text-align: center;
+  min-width: 40px; /* Ensure a minimum width for each stat */
+}
+
+.attack-info {
+  padding: 5px;
+  background-color: rgba(240, 240, 240, 0.8);
+  border-radius: 4px;
+}
+
+.attack-values {
+  display: flex;
+  flex: 1;
+}
+
+.attack-input {
+  margin-bottom: 15px;
+}
+
+.attack-stats {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 5px;
+}
+
+.attack-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.attack-stat label {
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.attack-stat input {
+  width: 40px;
+}
+
+.faction-text {
+  border: 2px solid;
+  border-image: linear-gradient(135deg, #BFA100 0%, #E4D895 21%, #DEA722 37%, #E6CF0E 57%, #CB9705 81%, #92611A 100%);
+  border-image-slice: 1;
+  width: 80%;
+  height: 93px;
+  margin: 10px auto;
+  color: black;
+  text-align: left;
+  font-size: 12px;
+  line-height: 1.5;
+  font-family: 'Trattatello', fantasy;
+  white-space: pre-line;
+}
+
+.other-attack-attributes {
+  flex: 0 0 50px;
+  font-size: 15px;
+  text-align: center;
+  overflow: visible;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2; /* Ensure this is correct */
+  line-clamp: 2; /* Add this line for non-webkit browsers */
+  max-height: 3em; /* Adjust based on your line-height */
+  line-height: 1.5; /* Ensure this matches your desired line height */
+  word-wrap: break-word; /* Ensure text wrapping */
+  white-space: normal;
+  max-height: none; /* Allow the text to grow beyond the initial size */
+  line-clamp: none; /* Remove the line clamp */
+  -webkit-line-clamp: none; /* Remove the webkit line clamp */
+}
+
+@media (max-width: 768px) {
+  .card-creator {
+    flex-direction: column;
+  }
+}
+
+.invulnerable-save {
+  position: absolute;
+  background: url('resources/invulnerable_img.png') no-repeat center center;
+  background-size: cover;
+  width: 70px;
+  height: 77px;
+  transform: translate(20%, 50%);
+  color: white;
+  font-size: 2.1em;
+  /* Add the following properties to move the font down and to the right */
+  padding-top: 28px;
+  padding-left: 28px;
+}

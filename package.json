@@ -1,0 +1,8 @@
+{
+  "name": "warhammercardpages",
+  "version": "1.0.0",
+  "description": "Custom Warhammer Card Creator",
+  "main": "index.js",
+  "author": "",
+  "license": "ISC"
+}
