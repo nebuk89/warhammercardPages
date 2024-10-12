@@ -329,4 +329,29 @@ describe('App Component', () => {
     const invulnerableSave = getByText('4+');
     expect(invulnerableSave).toBeInTheDocument();
   });
+
+  test('should render the upload roster button', () => {
+    const { getByText } = render(<App />);
+    const uploadButton = getByText('Upload Roster');
+    expect(uploadButton).toBeInTheDocument();
+  });
+
+  test('should trigger file input click when upload roster button is clicked', () => {
+    const { getByText } = render(<App />);
+    const uploadButton = getByText('Upload Roster');
+    const fileInput = document.getElementById('fileInput');
+    const clickSpy = jest.spyOn(fileInput, 'click');
+    fireEvent.click(uploadButton);
+    expect(clickSpy).toHaveBeenCalled();
+  });
+
+  test('should call handleFileSelect function when a file is selected', () => {
+    const { getByText } = render(<App />);
+    const uploadButton = getByText('Upload Roster');
+    const fileInput = document.getElementById('fileInput');
+    const handleFileSelectSpy = jest.spyOn(fileInput, 'onChange');
+    fireEvent.click(uploadButton);
+    fireEvent.change(fileInput, { target: { files: [new File(['dummy content'], 'example.ros')] } });
+    expect(handleFileSelectSpy).toHaveBeenCalled();
+  });
 });
