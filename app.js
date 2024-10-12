@@ -26,36 +26,7 @@ function App() {
         reader.readAsDataURL(file);
       }
     };
-
-    // Event handler for file selection
-    const handleFileSelect = (event) => {
-      const input = event?.type === "resize"
-          ? fileChangeEvent?.target as HTMLInputElement
-          : event?.target as HTMLInputElement;
-    
-      cleanup();
-    
-      if (!input?.files) return;
-      const file = input?.files[0];
-    
-      if (event?.type !== "resize") fileChangeEvent = event;
-    
-      file.arrayBuffer().then(async (buf) => {
-        if (file.name.match(/\.rosz?$/)) {
-          const xmldata = await maybeUnzip(buf, /[^/]+\.ros$/);
-          parseBattleScribeXML(xmldata);
-        } else if (file.name.match(/\.regi[sz]try$/)) {
-          const jsondata = await maybeUnzip(buf, /[^/]+\.registry$/);
-          parseRosterizerJSON(jsondata);
-        } else {
-          showErrorModal(`PrettyScribe does not support extension of ${file.name}.`);
-        }
-      }).catch((e) => {
-        showErrorModal(`Error opening ${file.name}: ${e}`);
-        console.error(e);
-      });
-    };
-
+  
     // Event handler for attribute change
     const handleAttributeChange = (attr, value) => {
       setAttributes(prev => ({ ...prev, [attr]: value }));
@@ -341,13 +312,6 @@ function App() {
                 />
               </div>
             )}
-            <button onClick={() => document.getElementById('fileInput').click()}>Upload Roster</button>
-            <input
-              type="file"
-              id="fileInput"
-              style={{ display: 'none' }}
-              onChange={handleFileSelect}
-            />
           </div>
           <div className="card-preview">
             <div className="warhammer-card-wrapper">
@@ -415,3 +379,4 @@ function App() {
   console.error('Error rendering React component:', error);
   document.getElementById('debug').innerHTML += '<br>Error rendering React component. Check console for details.';
 }
+
