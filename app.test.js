@@ -121,11 +121,11 @@ describe('App Component', () => {
     const tickBox = getByLabelText('Show Image');
     fireEvent.click(tickBox);
     const image = getByAltText('Invulnerable Save');
-    const pokemonImage = getByAltText('Unit');
-    const pokemonImageRect = pokemonImage.getBoundingClientRect();
+    const warhammerImage = getByAltText('Unit');
+    const warhammerImageRect = warhammerImage.getBoundingClientRect();
     const imageRect = image.getBoundingClientRect();
-    expect(imageRect.left).toBeCloseTo(pokemonImageRect.right - imageRect.width / 2);
-    expect(imageRect.top).toBeCloseTo(pokemonImageRect.bottom - imageRect.height / 2);
+    expect(imageRect.left).toBeCloseTo(warhammerImageRect.right - imageRect.width / 2);
+    expect(imageRect.top).toBeCloseTo(warhammerImageRect.bottom - imageRect.height / 2);
   });
 
   test('should ensure the invulnerable-save image remains in its initial position when the attacks object changes', () => {
@@ -161,7 +161,7 @@ describe('App Component', () => {
     const imageButton = getByText('Export to Image');
     fireEvent.click(imageButton);
     // Assuming handleExportToImage function generates an image with specific dimensions
-    const cardWrapper = document.querySelector('.pokemon-card-wrapper');
+    const cardWrapper = document.querySelector('.warhammer-card-wrapper');
     html2canvas(cardWrapper, { backgroundColor: null, scale: 3, useCORS: true, allowTaint: true }).then(canvas => {
       const imgData = canvas.toDataURL('image/jpeg');
       const img = new Image();
@@ -173,11 +173,11 @@ describe('App Component', () => {
     });
   });
 
-  test('should capture the content of the .pokemon-card-wrapper including images', () => {
+  test('should capture the content of the .warhammer-card-wrapper including images', () => {
     const { getByText } = render(<App />);
     const imageButton = getByText('Export to Image');
     fireEvent.click(imageButton);
-    const cardWrapper = document.querySelector('.pokemon-card-wrapper');
+    const cardWrapper = document.querySelector('.warhammer-card-wrapper');
     html2canvas(cardWrapper, { backgroundColor: null, scale: 3, useCORS: true, allowTaint: true }).then(canvas => {
       const imgData = canvas.toDataURL('image/jpeg');
       expect(imgData).toContain('data:image/jpeg;base64');
@@ -188,7 +188,7 @@ describe('App Component', () => {
     const { getByText } = render(<App />);
     const imageButton = getByText('Export to Image');
     fireEvent.click(imageButton);
-    const cardWrapper = document.querySelector('.pokemon-card-wrapper');
+    const cardWrapper = document.querySelector('.warhammer-card-wrapper');
     html2canvas(cardWrapper, { backgroundColor: null, scale: 3, useCORS: true, allowTaint: true, foreignObjectRendering: true }).then(canvas => {
       const imgData = canvas.toDataURL('image/jpeg');
       const img = new Image();
@@ -203,7 +203,7 @@ describe('App Component', () => {
     const { getByText } = render(<App />);
     const imageButton = getByText('Export to Image');
     fireEvent.click(imageButton);
-    const cardWrapper = document.querySelector('.pokemon-card-wrapper');
+    const cardWrapper = document.querySelector('.warhammer-card-wrapper');
     html2canvas(cardWrapper, { backgroundColor: null, scale: 3, useCORS: true, allowTaint: true, foreignObjectRendering: true }).then(canvas => {
       const imgData = canvas.toDataURL('image/jpeg');
       const img = new Image();
@@ -238,7 +238,7 @@ describe('App Component', () => {
     fireEvent.change(dropdown, { target: { value: 'JPEG' } });
     const imageButton = getByText('Export to Image');
     fireEvent.click(imageButton);
-    const cardWrapper = document.querySelector('.pokemon-card-wrapper');
+    const cardWrapper = document.querySelector('.warhammer-card-wrapper');
     html2canvas(cardWrapper, { backgroundColor: '#fff', scale: 3, useCORS: true, allowTaint: true }).then(canvas => {
       const imgData = canvas.toDataURL('image/jpeg');
       expect(imgData).toContain('data:image/jpeg;base64');
@@ -249,7 +249,7 @@ describe('App Component', () => {
     const { getByText } = render(<App />);
     const imageButton = getByText('Export to Image');
     fireEvent.click(imageButton);
-    const cardWrapper = document.querySelector('.pokemon-card-wrapper');
+    const cardWrapper = document.querySelector('.warhammer-card-wrapper');
     html2canvas(cardWrapper, { backgroundColor: '#fff', scale: 3, useCORS: true, allowTaint: true }).then(canvas => {
       const imgData = canvas.toDataURL('image/png');
       const img = new Image();
@@ -268,7 +268,7 @@ describe('App Component', () => {
     const { getByText } = render(<App />);
     const imageButton = getByText('Export to Image');
     fireEvent.click(imageButton);
-    const cardWrapper = document.querySelector('.pokemon-card-wrapper');
+    const cardWrapper = document.querySelector('.warhammer-card-wrapper');
     html2canvas(cardWrapper, { backgroundColor: '#fff', scale: 3, useCORS: true, allowTaint: true }).then(canvas => {
       const imgData = canvas.toDataURL('image/png');
       const img = new Image();

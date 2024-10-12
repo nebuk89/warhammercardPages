@@ -65,21 +65,21 @@ function App() {
 
     // Function to resize text to fit within the maxWidth
     const resizeTextToFit = () => {
-      const pokemonCardTitle = document.querySelector('.pokemon-card h2');
+      const warhammerCardTitle = document.querySelector('.warhammer-card h2');
       const attackInfoElements = document.querySelectorAll('.attack-info');
       const maxWidth = 240;
       const maxWidthAttack = 110;
 
-      let fontSize = parseInt(window.getComputedStyle(pokemonCardTitle).fontSize);
-      if (pokemonCardTitle.scrollWidth > maxWidth) {
-        while (pokemonCardTitle.scrollWidth > maxWidth && fontSize > 0) {
+      let fontSize = parseInt(window.getComputedStyle(warhammerCardTitle).fontSize);
+      if (warhammerCardTitle.scrollWidth > maxWidth) {
+        while (warhammerCardTitle.scrollWidth > maxWidth && fontSize > 0) {
           fontSize--;
-          pokemonCardTitle.style.fontSize = fontSize + 'px';
+          warhammerCardTitle.style.fontSize = fontSize + 'px';
         }
       } else {
-        while (pokemonCardTitle.scrollWidth < pokemonCardTitle.clientWidth && fontSize < maxWidth) {
+        while (warhammerCardTitle.scrollWidth < warhammerCardTitle.clientWidth && fontSize < maxWidth) {
           fontSize++;
-          pokemonCardTitle.style.fontSize = fontSize + 'px';
+          warhammerCardTitle.style.fontSize = fontSize + 'px';
         }
       }
 
@@ -196,8 +196,7 @@ function App() {
 
     // Function to handle exporting to Image
     const handleExportToImage = () => {
-      //const cardWrapper = document.querySelector('.pokemon-card-wrapper');
-      const cardWrapper = document.querySelector('.pokemon-card-wrapper');
+      const cardWrapper = document.querySelector('.warhammer-card-wrapper');
       
       // Ensure the element exists
       if (!cardWrapper) {
@@ -315,8 +314,8 @@ function App() {
             )}
           </div>
           <div className="card-preview">
-            <div className="pokemon-card-wrapper">
-              <div className="pokemon-card">
+            <div className="warhammer-card-wrapper">
+              <div className="warhammer-card">
                 <div className="card-header">
                   <h2>{name || "Assault Intercessors"}</h2>
                   <div className="attributes">
@@ -331,7 +330,7 @@ function App() {
                   </div>
                 </div>
                 <div className="overlay-text">{overlayText || "Adeptus Astartes, Blood Angels"}</div>
-                {image && <img src={image} alt="Unit" className="pokemon-image" />}
+                {image && <img src={image} alt="Unit" className="warhammer-image" />}
                 {showImage && (
                   <div className="invulnerable-save"  ref={invulnerableSaveRef} style={{ top: initialPosition.current.top, left: initialPosition.current.left }}>
                     {saveValue}
