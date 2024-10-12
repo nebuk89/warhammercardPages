@@ -218,7 +218,7 @@ function App() {
 
     return (
       <div className="container">
-        <h1>Custom Warhammer Card Creator nebuk89 WIP</h1>
+        <h1>Custom Warhammer Card Creator WIP</h1>
         <div className="card-creator">
           <div className="input-section">
             <button onClick={handleExportToImage}>Export to Image</button>
