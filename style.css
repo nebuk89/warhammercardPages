@@ -59,7 +59,7 @@ body {
     flex: 1;
   }
   
-  .pokemon-card-wrapper {
+  .warhammer-card-wrapper {
     background-color: #88303A;
     padding: 20px;
     border-radius: 10px;
@@ -69,17 +69,17 @@ body {
     overflow: hidden; 
   }
   
-  .pokemon-card {
+  .warhammer-card {
     background-image: url('resources/background.png');
       background-size: cover;
     background-position: center;
     border-radius: 10px;
     padding: 20px;
     color: #333;
-    display: flex; /* Make the pokemon-card a flex container */
+    display: flex; /* Make the warhammer-card a flex container */
     flex-direction: column; /* Ensure children are stacked vertically */
-    position: relative; /* Add this line to make the pokemon-card a positioning context */
-    background-color: white; /* Ensure the .pokemon-card element has a background color set to white */
+    position: relative; /* Add this line to make the warhammer-card a positioning context */
+    background-color: white; /* Ensure the .warhammer-card element has a background color set to white */
   }
   
   .card-header {
@@ -89,7 +89,7 @@ body {
     margin-bottom: -15px;
   }
   
-  .pokemon-card h2 {
+  .warhammer-card h2 {
     margin: 0;
     padding: 5px 10px;
     font-family: 'Trattatello', fantasy;
@@ -151,7 +151,7 @@ body {
     transform: translate(-50%, -50%); /* Center both vertically and horizontally */
   }
 
-.pokemon-image {
+.warhammer-image {
   padding: 10px;
   object-fit: contain;
   background: linear-gradient(135deg, #381720 0%, #892E3A 52%, #B57B83 100%);
